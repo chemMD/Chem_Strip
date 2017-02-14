@@ -1,1 +1,23 @@
 
+#include <iostream>
+#include <cmath>
+
+double distance_between_two_points(double point1, double point2, double dims);
+    int between_two_points(){
+    
+}
+
+double distance_no_pbc(double point1, double point2);
+    int no_pbc(){
+
+}
+
+double remove_pbc(double atom_pos, double dims);
+    int remove_all_pbc(){
+	
+}
+
+int histogram_50(int data);
+    int histogram(){
+	
+}

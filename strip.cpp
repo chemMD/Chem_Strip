@@ -8,13 +8,11 @@ using namespace std;
 
 int main () {
 
-    int i;
-
     string   inputfilename;
     ifstream inputfile;
     string   residueinputname;
     string   atom;
-    string     atomlist;
+    string   atomlist;
     
     // Prompt user for input file + residue
     cout << "Enter input filename: " ;

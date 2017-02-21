@@ -3,19 +3,13 @@ CC = g++
 
 CFLAGS = -Wall
 
-all: stl_collection
+all: strip_all
 
-stl_collection: car.o car_db.o stl_collection.o
-	${CC} ${CFLAGS} car.o car_db.o stl_collection.o -o stl_collection
+strip_all: strip.o
+	${CC} ${CFLAGS} strip.o -o strip
 
-car.o: car.cpp
-	${CC} ${CFLAGS} -c car.cpp
-
-car_db.o: car_db.cpp
-	${CC} ${CFLAGS} -c car_db.cpp
-	
-stl_collection.o: stl_collection.cpp
-	${CC} ${CFLAGS} -c stl_collection.cpp
+strip.o: strip.cpp
+	${CC} ${CFLAGS} -c strip.cpp
 
 clean:
-	rm stl_collection *.o
+	rm strip_all *.o

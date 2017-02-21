@@ -3,8 +3,16 @@
 #include <fstream>
 #include <iostream>
 #include <list>
+#include <cmath>
 
 using namespace std;
+
+struct distance {
+    string atom_type;
+    float x_coord;
+    float y_coord;
+    float z_coord;
+};
 
 int main () {
 
@@ -13,6 +21,7 @@ int main () {
     string   residueinputname;
     string   atom;
     string   atomlist;
+    string   distance;
     
     // Prompt user for input file + residue
     cout << "Enter input filename: " ;

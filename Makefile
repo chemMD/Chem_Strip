@@ -12,4 +12,4 @@ strip.o: strip.cpp
 	${CC} ${CFLAGS} -c strip.cpp
 
 clean:
-	rm -rf strip.o
+	rm strip *.o

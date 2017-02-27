@@ -1,5 +1,5 @@
 /**
- * @mainpage The Car Database Program
+ * @mainpage Chemistry_Strip Program
  *
  * Welcome to the Chemistry_Strip documentation. Here you will find all the relevant info
  * related to this program which was designed to remove residues from AMBER suite 

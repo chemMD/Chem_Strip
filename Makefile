@@ -3,13 +3,15 @@ CC = g++
 
 CFLAGS = -Wall
 
-all: strip
+all: myprogram
 
-strip: strip.o
-	${CC} ${CFLAGS} strip.o -o strip
+myprogram: strip.o main.o
+	${CC} ${CFLAGS} -o myprogram strip.o main.o
 
 strip.o: strip.cpp
 	${CC} ${CFLAGS} -c strip.cpp
 
+main.o: main.cpp
+	${CC} ${CFLAGS} -c main.cpp
 clean:
-	rm strip *.o
+	rm myprogram *.o

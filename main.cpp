@@ -11,6 +11,7 @@
 #include <iostream>
 #include <list>
 #include <cmath>
+#include "strip.h"
 
 /**
  * @short   Chemistry_Strip
@@ -28,36 +29,39 @@
 
 using namespace std;
 
-#include "strip.h"
 
 int main () {
-
+    
     string   inputfilename;
     ifstream inputfile;
-    string   residueinputname;
+    string   inplist;
 
     cout << "Executing main..." << endl;
 
     // input file + residue
     cout << "Enter input filename: " ;
     cin  >> inputfilename;
-    cout << "Enter name of residue to be removed:";
-    cin  >> residueinputname;
-
+     
+    strip parameters;
+    
     // check file stream
     inputfile.open(inputfilename.c_str());
 
-    if ( !inputfile.is_open() )
+    if ( inputfile.is_open() ) {
+        cout << "Reading: " 
+             << inputfilename << endl;
+	while ( getline (inputfile,inplist) ) {
+	  cout << inplist << '\n';
+        }
+        cout << inplist;
+    }
+    else 
         cout << "Cannot open input file: " 
              << inputfilename << endl;
-    else 
-        cout << "Reading:" 
-             << inputfilename << endl;  
-           
-    strip x;
-    x.set_residue("WAT");
-    cout << "Residue :" 
-         << x.get_residue() 
+        
+    parameters.set_residue(inplist);
+    cout << "Residue: "
+         << parameters.get_residue() 
          << endl;
     
     return 0;

@@ -139,13 +139,13 @@ int main () {
     }
 
     cout << "Information about : " << number_of_atoms << " was read" << endl;
-    cout << "Atom Number Element Chain Seq X Y Z " << endl;
+    cout << "Atom     #   Ele   Res    Seq       X       Y          Z       LD    Score" << endl;
     
     for (int i = 0; i < number_of_atoms; i++) {
 
         cout << setw(9) << left << pdb[i].atom_type 
 	     << setw(4) << left << pdb[i].atom_number
-	     << setw(4) << left << pdb[i].element
+	     << setw(6) << left << pdb[i].element
 	     << setw(7) << left << Residue_Type_to_string(pdb[i].type) 
 	     << setw(8) << left << pdb[i].residue_number
 	     << setw(8) << left << pdb[i].x_coord

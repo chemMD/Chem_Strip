@@ -32,98 +32,9 @@ using namespace std;
 
 #include "strip.h"
 
-enum Residue_Type {
-    WAT,
-    AMG,
-    Cl,
-    CUB,
-};
-
-struct Atom {
-    string atom_type;
-    int atom_number;
-    string element;
-    Residue_Type type;
-    string residue_number;
-    double x_coord;
-    double y_coord;
-    double z_coord;
-    double ligand_distance;
-    double score;
-};
-
-const int MAXSIZE = 1000;
-
-string uppercase (string & s) {
-    string result = s;
-    for (int i=0; i < (int)result.size(); i++)
-        result[i] = toupper(result[i]);
-    return result;
-}
-
-bool is_valid_residue_type (string s) {
-    string ss = uppercase(s);
-    return ( (ss=="WAT") || (ss=="AMG") || (ss=="CL") || (ss=="CUB") );
-}
-
-string Residue_Type_to_string (Residue_Type c) {
-    switch (c) {
-    case WAT: return "WAT";
-    case AMG: return "AMG";
-    case Cl:   return "Cl";
-    case CUB: return "CUB";
-    }
-
-  // It should never get here!!                                                     
-    exit(EXIT_FAILURE);
-
-}
-
-Residue_Type string_to_Residue_Type (string s) {
-
-    string ss = uppercase(s);
-
-    if (ss == "WAT") return WAT;
-    if (ss == "AMG") return AMG;
-    if (ss == "CL"  ) return Cl;
-    if (ss == "CUB") return CUB;
-
-  // It should never get here!!                                                     
-    exit(EXIT_FAILURE);
-}
-
-bool read_input (string inputfilename, Atom db[MAXSIZE], int & size) {
-
-    ifstream ifile(inputfilename.c_str());
-    if ( !ifile.is_open() ) return false;             
-    
-    string type;
-
-    size = 0;
-
-    while ( size < MAXSIZE ) {
-
-        if ( !(ifile >> db[size].atom_type >> db[size].atom_number 
-            >> db[size].element >> type >> db[size].residue_number
-            >> db[size].x_coord >> db[size].y_coord >> db[size].z_coord 
-            >> db[size].ligand_distance >> db[size].score ) )
-            break;
-
-        if ( !is_valid_residue_type(type) ) {
-            cout << "Invalid residue type: " << type
-                 << "; assuming WAT" << endl;
-            type = "WAT";
-        }
-
-        db[size].type = string_to_Residue_Type(type);
-        size++;
-    }
-    return true;
-}
-
 int main () {
-    
-    Atom pdb[MAXSIZE];
+    strip p;
+    strip::Atom pdb[1000];
     int number_of_atoms;
 
     string   inputfilename;
@@ -132,8 +43,7 @@ int main () {
     // input file + residue
     cout << "Enter input filename: " ;
     cin  >> inputfilename;
-     
-    if ( !read_input(inputfilename, pdb, number_of_atoms ) ) {
+    if ( !p.read_input(inputfilename, pdb, number_of_atoms ) ) {
         cout << "Problems opening database file: " << inputfilename << endl;
         return 0;
     }
@@ -146,7 +56,7 @@ int main () {
         cout << setw(9) << left << pdb[i].atom_type 
 	     << setw(4) << left << pdb[i].atom_number
 	     << setw(6) << left << pdb[i].element
-	     << setw(7) << left << Residue_Type_to_string(pdb[i].type) 
+	     << setw(7) << left << p.Residue_Type_to_string(pdb[i].type) 
 	     << setw(8) << left << pdb[i].residue_number
 	     << setw(8) << left << pdb[i].x_coord
              << setw(8) << left << pdb[i].y_coord

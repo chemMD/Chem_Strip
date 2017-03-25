@@ -1,17 +1,23 @@
+program_NAME := MD_strip
+CXXFLAGS += -Wall -std=c++0x
+io_OBJS := $(wildcard src/*.cpp)
+program_OBJS := $(io_OBJS:.cpp=.o)
 
-CC = g++
+.PHONY: all clean cleanall
 
-CFLAGS = -Wall
+all : $(program_NAME)
 
-all: myprogram
+$(program_NAME): $(program_OBJS)
+	$(LINK.cc) $(program_OBJS) -o $(program_NAME)
 
-myprogram: strip.o main.o
-	${CC} ${CFLAGS} -o myprogram strip.o main.o
+$(program_strip): $(program_SRC)
+	$(MAKE) -C src
 
-strip.o: strip.cpp
-	${CC} ${CFLAGS} -c strip.cpp
+clean :
+	@- $(RM) $(program_OBJS)
+	@- $(MAKE) clean -C src
 
-main.o: main.cpp
-	${CC} ${CFLAGS} -c main.cpp
-clean:
-	rm myprogram *.o
+cleanall :
+	@- $(RM) $(program_OBJS)
+	@- $(RM) $(program_NAME)
+	@- $(MAKE) cleanall -C src

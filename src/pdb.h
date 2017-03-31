@@ -17,7 +17,7 @@ class Pdb {
             int atom_number;
             string element;
             string type;
-            string residue_number;
+            int residue_number;
             double x_coord;
             double y_coord;
             double z_coord;

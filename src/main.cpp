@@ -40,13 +40,12 @@ int main() {
     cout << "Information about : " << p.number_of_atoms << " was read" << endl;
     cout << "Atom     #   Ele   Res    Seq       X       Y          Z       LD \
    Score" << endl;
-
     for ( int i = 0; i < p.number_of_atoms; i++ ) {
 
         cout << setw(9) << left << p.pdb[i].atom_type
 	     << setw(4) << left << p.pdb[i].atom_number
 	     << setw(6) << left << p.pdb[i].element
-	     << setw(7) << left << p.Residue_Type_to_string(p.pdb[i].type)
+	     << setw(7) << left << p.pdb[i].type
 	     << setw(8) << left << p.pdb[i].residue_number
 	     << setw(8) << left << p.pdb[i].x_coord
 	     << setw(8) << left << p.pdb[i].y_coord
@@ -54,7 +53,14 @@ int main() {
 	     << setw(6) << right << p.pdb[i].ligand_distance
 	     << setw(6) << right << p.pdb[i].score
 	     << endl;
+
     }
 
+    cout << p.number_of_atoms << endl;
+    
+    for ( int i = 0; i < p.number_of_atoms; i++ ) {
+        cout << p.pdb[i].type << endl;
+    }
+    
     return 0;   
 }

@@ -11,7 +11,7 @@ using namespace std;
 
 #include "pdb.h"
 
-bool Pdb::read_pdb ( string pdbfilename, Atom db[110], int & size ) {
+bool Pdb::read_pdb ( string pdbfilename, Atom db[10000], int & size ) {
 
     ifstream ifile( pdbfilename );
     string ter = "TER";
@@ -20,27 +20,30 @@ bool Pdb::read_pdb ( string pdbfilename, Atom db[110], int & size ) {
 
     size = 0;
 
-    for ( int i = 0; i < 110; i = i + 1 ) {
+    for ( int i = 0; i < 10000; i = i + 1 ) {
       
       ifile >> db[size].atom_type ;
         if ( db[size].atom_type == ter ) {
 	    continue;
-        } 
-        ifile        >> db[size].atom_number 
-                     >> db[size].element 
-                     >> db[size].type 
-                     >> db[size].residue_number 
-                     >> db[size].x_coord 
-                     >> db[size].y_coord 
-                     >> db[size].z_coord 
-                     >> db[size].ligand_distance 
-	             >> db[size].score;
-	     size++;  
-        
+        } else if ( ifile >> db[size].atom_number 
+                          >> db[size].element 
+                          >> db[size].type 
+                          >> db[size].residue_number 
+                          >> db[size].x_coord 
+                          >> db[size].y_coord 
+                          >> db[size].z_coord 
+                          >> db[size].ligand_distance 
+		          >> db[size].score) {
+	    size++;
+         
+        } else { 
+
+	    break;
+        }
     }
     return true;
 }
 
-Pdb::Atom pdb[110];
+Pdb::Atom pdb[10000];
 int Pdb::number_of_atoms;
 string Pdb::pdbfilename;

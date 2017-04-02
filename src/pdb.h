@@ -1,4 +1,3 @@
-// simple multi file example with Car.h,  Car.cpp, and main.cpp
 #include <stdlib.h>
 #include <string>
 #include <fstream>
@@ -25,7 +24,7 @@ class Pdb {
             double score;
         };
         static int number_of_atoms;
-        Atom pdb[1000];
+        Atom pdb[10000];
         static string pdbfilename;
-        bool read_pdb (string pdbfilename, Atom db[1000], int & size);
+        bool read_pdb (string pdbfilename, Atom db[10000], int & size);
 };

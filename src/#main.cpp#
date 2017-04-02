@@ -12,6 +12,7 @@ using namespace std;
 
 #include "input.h"
 #include "pdb.h"
+#include "pdb_out.h"
 
 int main() {
 
@@ -82,7 +83,7 @@ int main() {
 	  ofile << setw(9) << left << p.pdb[i].atom_type
 		<< setw(4) << left << p.pdb[i].atom_number
 		<< setw(6) << left << p.pdb[i].element
-		<< setw(7) << left << p.pdb[i].type
+		<x< setw(7) << left << p.pdb[i].type
 		<< setw(8) << left << p.pdb[i].residue_number
 		<< setw(8) << left << p.pdb[i].x_coord
 		<< setw(8) << left << p.pdb[i].y_coord

@@ -59,8 +59,44 @@ int main() {
     cout << p.number_of_atoms << endl;
     
     for ( int i = 0; i < p.number_of_atoms; i++ ) {
-        cout << p.pdb[i].type << endl;
+        if (!(p.pdb[i].type == inp.stripcommand)) {
+            cout << setw(9) << left << p.pdb[i].atom_type
+	         << setw(4) << left << p.pdb[i].atom_number
+	         << setw(6) << left << p.pdb[i].element
+	         << setw(7) << left << p.pdb[i].type
+	         << setw(8) << left << p.pdb[i].residue_number
+	         << setw(8) << left << p.pdb[i].x_coord
+	         << setw(8) << left << p.pdb[i].y_coord
+	         << setw(8) << right << p.pdb[i].z_coord
+	         << setw(6) << right << p.pdb[i].ligand_distance
+	         << setw(6) << right << p.pdb[i].score
+	         << endl;
+
+        }
     }
+    ofstream ofile;
+    ofile.open("out.pdb");
+    if (ofile.is_open()) {
+      for ( int i = 0; i < p.number_of_atoms; i++ ) {
+	if (!(p.pdb[i].type == inp.stripcommand)) {
+	  ofile << setw(9) << left << p.pdb[i].atom_type
+		<< setw(4) << left << p.pdb[i].atom_number
+		<< setw(6) << left << p.pdb[i].element
+		<< setw(7) << left << p.pdb[i].type
+		<< setw(8) << left << p.pdb[i].residue_number
+		<< setw(8) << left << p.pdb[i].x_coord
+		<< setw(8) << left << p.pdb[i].y_coord
+		<< setw(8) << right << p.pdb[i].z_coord
+		<< setw(6) << right << p.pdb[i].ligand_distance
+		<< setw(6) << right << p.pdb[i].score
+		<< endl;
+	}
+      }
+
     
+      ofile.close();
+    }
+    else cout << "Unable to open file";
+
     return 0;   
 }

@@ -12,8 +12,9 @@ class Input {
 
     public:
         string inputfilename;
-        string inputArray[5];
+        string inputArray[6];
         string pdbfilename;
+        string pdboutname;
         string parmfilename;
         string mdcrdfilename;
         string stripcommand;

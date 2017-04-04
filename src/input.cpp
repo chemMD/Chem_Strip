@@ -22,15 +22,14 @@ bool Input::read_input( string inputfilename ) {
     file.open( inputfilename.c_str() );
     if( !file.is_open() ) return false;
      
-    for( int i = 0; i < 6; ++i ) {
+    for( int i = 0; i < 5; ++i ) {
 	  file >> inputArray[i];
         }
     pdbfilename   = inputArray[0];
     pdboutname    = inputArray[1];
-    parmfilename  = inputArray[2];
-    mdcrdfilename = inputArray[3];
-    stripcommand  = inputArray[4];
-    rdfcommand    = inputArray[5];
+    mdcrdfilename = inputArray[2];
+    stripcommand  = inputArray[3];
+    rdfcommand    = inputArray[4];
    
     return true;
 }

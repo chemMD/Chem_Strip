@@ -29,7 +29,7 @@ using namespace std;
 
 #include "input.h"
 #include "pdb.h"
-
+#include "mdcrd.h"
 int main() {
 
     Input inp;
@@ -42,7 +42,7 @@ int main() {
     }
 
     cout << inp.pdbfilename << endl;
-    cout << inp.parmfilename << endl;
+    cout << inp.pdboutname << endl;
     cout << inp.mdcrdfilename << endl;
     cout << inp.stripcommand << endl;
     cout << inp.rdfcommand << endl; 
@@ -79,7 +79,14 @@ int main() {
         cout << "Problems writing pdb file: " << p.pdbfilename << endl;
         return 0;
     }
-    
+
+    Mdcrd m;
+
+    if ( !m.read_mdcrd( inp.mdcrdfilename, m.mdcrd, p.number_of_atoms ) ) {
+      cout << "Problems opening mdcrd file: " << m.mdcrdfilename << endl;
+      return 0;
+    }
 
     return 0;   
 }
+   

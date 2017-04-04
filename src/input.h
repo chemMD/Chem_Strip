@@ -9,7 +9,6 @@
 #include <iomanip>
 
 class Input {
-
     public:
         string inputfilename;
         string inputArray[5];
@@ -19,7 +18,6 @@ class Input {
         string stripcommand;
         string rdfcommand;
         bool read_input(string inputfilename);
-
 };
 
 

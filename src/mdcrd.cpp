@@ -13,7 +13,6 @@ using namespace std;
 #include "mdcrd.h"
 
 bool Mdcrd::read_mdcrd ( string mdcrdfilename, Coordinates mdcrd[5272], int & size ) {
-
     ifstream parmfile( mdcrdfilename );
     size=0;
     if (!(parmfile.is_open())) {

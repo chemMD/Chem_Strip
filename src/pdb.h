@@ -9,7 +9,6 @@
 #include <vector>
 
 class Pdb {
-
     public:
         struct Atom {
             string atom_type;

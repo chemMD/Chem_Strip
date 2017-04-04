@@ -9,9 +9,7 @@
 #include <vector>
 
 class Mdcrd {
-
     public:
-        
         struct Coordinates {
             string X;
             string Y;

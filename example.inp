@@ -1,5 +1,4 @@
-example.pdb
-1.parm
-1.mdcrd
+example.pdb out.pdb
+example.mdcrd
 WAT
 NH3@O

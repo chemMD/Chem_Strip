@@ -26,7 +26,7 @@ bool Input::read_input( string inputfilename ) {
 	  file >> inputArray[i];
         }
     pdbfilename   = inputArray[0];
-    parmfilename  = inputArray[1];
+    pdboutname    = inputArray[1];
     mdcrdfilename = inputArray[2];
     stripcommand  = inputArray[3];
     rdfcommand    = inputArray[4];

@@ -14,7 +14,7 @@ class Input {
         string inputfilename;
         string inputArray[5];
         string pdbfilename;
-        string parmfilename;
+        string pdboutname;
         string mdcrdfilename;
         string stripcommand;
         string rdfcommand;

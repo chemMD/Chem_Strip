@@ -26,5 +26,8 @@ class Pdb {
         static int number_of_atoms;
         Atom pdb[10000];
         static string pdbfilename;
-        bool read_pdb (string pdbfilename, Atom db[10000], int & size);
+        static string pdboutname;
+        static string stripcommand;
+        bool read_pdb (string pdbfilename, Atom pdb[10000], int & size);
+        bool write_pdb (string pdboutename, string stripcommand, Atom pdb[10000], int number_of_atoms);
 };

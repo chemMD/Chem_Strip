@@ -13,15 +13,11 @@ using namespace std;
 #include "pdb.h"
 
 bool Pdb::read_pdb ( string pdbfilename, Atom pdb[10000], int & size ) {
-
     ifstream ifile( pdbfilename );
     string ter = "TER";
     if ( !ifile.is_open() ) return false;
-
     size = 0;
-
     for ( int i = 0; i < 10000; i = i + 1 ) {
-      
       ifile >> pdb[size].atom_type ;
         if ( pdb[size].atom_type == ter ) {
 	    continue;
@@ -35,9 +31,7 @@ bool Pdb::read_pdb ( string pdbfilename, Atom pdb[10000], int & size ) {
                           >> pdb[size].ligand_distance 
 		          >> pdb[size].score) {
 	    size++;
-         
         } else { 
-
 	    break;
         }
     }
@@ -52,9 +46,9 @@ bool Pdb::write_pdb ( string pdboutname, string stripcommand, Atom pdb[10000], i
         return false;
     }
     for ( int i = 0; i < number_of_atoms; i++ ) {
-      if (!(pdb[i].type == stripcommand)) {
-	ofile << setw(9) << left << pdb[i].atom_type
-	      << setw(4) << left << pdb[i].atom_number
+        if (!(pdb[i].type == stripcommand)) {
+	    ofile << setw(9) << left << pdb[i].atom_type
+	          << setw(4) << left << pdb[i].atom_number
 	      << setw(6) << left << pdb[i].element
 	      << setw(7) << left << pdb[i].type
 	      << setw(8) << left << pdb[i].residue_number
@@ -65,11 +59,10 @@ bool Pdb::write_pdb ( string pdboutname, string stripcommand, Atom pdb[10000], i
 	      << setw(6) << right << pdb[i].score
 	      << endl;
 
-      }
+        }
     }
     return true;
 }
-
 Pdb::Atom pdb[10000];
 int Pdb::number_of_atoms;
 string Pdb::pdbfilename;

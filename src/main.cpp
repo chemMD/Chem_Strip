@@ -1,13 +1,13 @@
 /**
- * @mainpage The Gaussian Optimization Analytical Tool (GOAT)
+ * @mainpage The Molecular Dynamics File Strip (MD_strip)
  *
- * Welcome to the Gaussian Optimization Analytical Tool (GOAT) documentation site!
- * Users may find relevant info related to this program, a program designed to provide
- * structural analyses of biomolecules successfully optimized using Gaussian software.
+ * Welcome to The Molecular Dynamics File Strip (MD_strip) documentation site!
+ * Users may find relevant info related to this program, a program designed to remove
+ * residues from Protein Data Base (pdb) files and topology (mdcrd) files used in molecular dynamics.
  *
  * @short   Main program
  * @file    main.cpp
- * @author  Kate Charbonnet, Hannah Lozano, and Thomas Summers
+ * @author  Caleb Gallops and Dennis Kennetz
  * @param   none
  * @return  0 on success
  *
@@ -31,29 +31,22 @@ using namespace std;
 #include "pdb.h"
 #include "mdcrd.h"
 int main() {
-
     Input inp;
-
     cout << "Initializing main..." << endl;
-
     if ( !inp.read_input( inp.inputfilename ) ) {
         cout << "Problems opening input file: " << inp.inputfilename << endl;
         return 0;
     }
-
     cout << inp.pdbfilename << endl;
     cout << inp.pdboutname << endl;
     cout << inp.mdcrdfilename << endl;
     cout << inp.stripcommand << endl;
     cout << inp.rdfcommand << endl; 
-
     Pdb p;
-
     if ( !p.read_pdb( inp.pdbfilename, p.pdb, p.number_of_atoms ) ) {
         cout << "Problems opening pdb file: " << p.pdbfilename << endl;
         return 0;
     }
-
     cout << "Information about : " << p.number_of_atoms << " was read" << endl;
     cout << "Atom     #   Ele   Res    Seq       X       Y          Z       LD \
    Score" << endl;
@@ -70,23 +63,16 @@ int main() {
 	     << setw(6) << right << p.pdb[i].ligand_distance
 	     << setw(6) << right << p.pdb[i].score
 	     << endl;
-
     }
-
     cout << p.number_of_atoms << endl;
-    
     if ( !p.write_pdb( inp.pdboutname, inp.stripcommand, p.pdb, p.number_of_atoms ) ) {
         cout << "Problems writing pdb file: " << p.pdbfilename << endl;
         return 0;
     }
-
     Mdcrd m;
-
     if ( !m.read_mdcrd( inp.mdcrdfilename, m.mdcrd, p.number_of_atoms ) ) {
-      cout << "Problems opening mdcrd file: " << m.mdcrdfilename << endl;
-      return 0;
+        cout << "Problems opening mdcrd file: " << m.mdcrdfilename << endl;
+        return 0;
     }
-
     return 0;   
 }
-   

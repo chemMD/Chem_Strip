@@ -9,7 +9,9 @@
 #include <vector>
 
 class Pdb {
+
     public:
+
         struct Atom {
             string atom_type;
             int atom_number;
@@ -22,6 +24,7 @@ class Pdb {
             double ligand_distance;
             double score;
         };
+
         static int number_of_atoms;
         Atom pdb[10000];
         static string pdbfilename;

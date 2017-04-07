@@ -45,22 +45,21 @@ int main( int argc, char* argv[] ) {
     cout << i.stripcommand << endl;
     cout << i.rdfcommand << endl;
 
-    Pdb p;
-
-    if ( !p.read_pdb( i.pdbfilename, p.pdb, p.number_of_atoms ) ) {
-        cout << "Problems opening pdb file: " << p.pdbfilename << endl;
+    if ( !read_pdb( i.pdbfilename, number_of_atoms) ) {
+        cout << "Problems opening pdb file: " << i.pdbfilename << endl;
         return 0;
     }
 
-    cout << "Number of atoms: " << p.number_of_atoms << endl;
-    if ( !p.write_pdb( i.pdboutname, i.stripcommand, p.pdb, p.number_of_atoms ) ) {
-        cout << "Problems writing pdb file: " << p.pdbfilename << endl;
+    cout << "Number of atoms: " << number_of_atoms << endl;
+
+    if ( !write_pdb( i.pdboutname, i.stripcommand ) ) {
+        cout << "Problems writing pdb file: " << i.pdbfilename << endl;
         return 0;
     }
 
     Mdcrd m;
 
-    if ( !m.read_mdcrd( i.mdcrdfilename, m.mdcrd, p.number_of_atoms ) ) {
+    if ( !m.read_mdcrd( i.mdcrdfilename, m.mdcrd, number_of_atoms ) ) {
         cout << "Problems opening mdcrd file: " << m.mdcrdfilename << endl;
         return 0;
     }

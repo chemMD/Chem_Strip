@@ -12,16 +12,14 @@ using namespace std;
 #include "input.h"
 #include "pdb.h"
 
-Pdb::Atom pdb[10000];
-int Pdb::number_of_atoms;
-string Pdb::pdbfilename;
-string Pdb::pdboutname;
-string Pdb::stripcommand;
+vector<Atom> pdb;
 
-bool Pdb::read_pdb ( string pdbfilename, Atom pdb[10000], int & size ) {
+bool read_pdb ( string pdbfilename, int & size ) {
 
     ifstream ifile( pdbfilename );
     string ter = "TER";
+
+
     size = 0;
 
     if ( !ifile.is_open() ) {
@@ -29,39 +27,40 @@ bool Pdb::read_pdb ( string pdbfilename, Atom pdb[10000], int & size ) {
         return false;
     }
 
-    for ( int i = 0; i < 10000; i = i + 1 ) {
+    pdb.push_back(Atom());
+
+    for ( int i = 0; i < 10000; i++ ) {
 
         ifile >> pdb[size].atom_type ;
 
         if ( pdb[size].atom_type == ter ) {
 
             continue;
-
-        } else if ( ifile >> pdb[size].atom_number 
-                          >> pdb[size].element 
-                          >> pdb[size].type 
-                          >> pdb[size].residue_number 
-                          >> pdb[size].x_coord 
-                          >> pdb[size].y_coord 
-                          >> pdb[size].z_coord 
-                          >> pdb[size].ligand_distance 
+        } else if ( ifile >> pdb[size].atom_number
+                          >> pdb[size].element
+                          >> pdb[size].type
+                          >> pdb[size].residue_number
+                          >> pdb[size].x_coord
+                          >> pdb[size].y_coord
+                          >> pdb[size].z_coord
+                          >> pdb[size].ligand_distance
                           >> pdb[size].score) {
-        size++;
+            size++;
+            pdb.push_back(Atom());
 
         } else {
 
             break;
-
         }
     }
 
     return true;
 }
 
-bool Pdb::write_pdb ( string pdboutname, string stripcommand, Atom pdb[10000], int number_of_atoms) {
+bool write_pdb ( string pdboutname, string stripcommand ) {
 
-    ofstream ofile( pdboutname );
-    
+    ofstream ofile;
+    ofile.open( pdboutname );
     if ( !ofile.is_open() ) {
         return false;
     }

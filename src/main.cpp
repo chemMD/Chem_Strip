@@ -30,37 +30,37 @@ using namespace std;
 #include "input.h"
 #include "pdb.h"
 #include "mdcrd.h"
-int main() {
 
-    Input inp;
+int main( int argc, char* argv[] ) {
+
     cout << "Initializing main..." << endl;
-    if ( !inp.read_input( inp.inputfilename ) ) {
-        cout << "Problems opening input file: " << inp.inputfilename << endl;
+    if ( !read_input( argv[1] ) ) {
+        cout << "Problems opening input file: " << argv[1] << endl;
         return 0;
     }
 
-    cout << inp.pdbfilename << endl;
-    cout << inp.pdboutname << endl;
-    cout << inp.mdcrdfilename << endl;
-    cout << inp.stripcommand << endl;
-    cout << inp.rdfcommand << endl; 
+    cout << i.pdbfilename << endl;
+    cout << i.pdboutname << endl;
+    cout << i.mdcrdfilename << endl;
+    cout << i.stripcommand << endl;
+    cout << i.rdfcommand << endl;
 
     Pdb p;
 
-    if ( !p.read_pdb( inp.pdbfilename, p.pdb, p.number_of_atoms ) ) {
+    if ( !p.read_pdb( i.pdbfilename, p.pdb, p.number_of_atoms ) ) {
         cout << "Problems opening pdb file: " << p.pdbfilename << endl;
         return 0;
     }
 
     cout << "Number of atoms: " << p.number_of_atoms << endl;
-    if ( !p.write_pdb( inp.pdboutname, inp.stripcommand, p.pdb, p.number_of_atoms ) ) {
+    if ( !p.write_pdb( i.pdboutname, i.stripcommand, p.pdb, p.number_of_atoms ) ) {
         cout << "Problems writing pdb file: " << p.pdbfilename << endl;
         return 0;
     }
 
     Mdcrd m;
 
-    if ( !m.read_mdcrd( inp.mdcrdfilename, m.mdcrd, p.number_of_atoms ) ) {
+    if ( !m.read_mdcrd( i.mdcrdfilename, m.mdcrd, p.number_of_atoms ) ) {
         cout << "Problems opening mdcrd file: " << m.mdcrdfilename << endl;
         return 0;
     }

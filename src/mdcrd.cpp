@@ -33,25 +33,23 @@ bool Mdcrd::read_mdcrd ( string mdcrdfilename, Coordinates mdcrd[5272], int & si
 
             parmfile >> mdcrd[size].X;
 
-        if ( i == 1 ) {
+            if ( i == 1 ) {
 
-            continue;
+                continue;
 
             } else if (parmfile >> mdcrd[size].X >> mdcrd[size].Y >> mdcrd[size].Z) {
 
-                cout <<  setw(8) << left << mdcrd[size].X
-                     <<  setw(8) << left << mdcrd[size].Y 
-                     <<  setw(8) << left << mdcrd[size].Z << endl;
+                cout << setw(8) << left << mdcrd[size].X
+                     << setw(8) << left << mdcrd[size].Y
+                     << setw(8) << left << mdcrd[size].Z << endl;
                 size++;
 
             } else {
 
-            break;
-
-            } 
+                break;
+            }
         }
 
     return true;
-
     }
 }

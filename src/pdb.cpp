@@ -36,6 +36,7 @@ bool read_pdb ( string pdbfilename, int & size ) {
         if ( pdb[size].atom_type == ter ) {
 
             continue;
+
         } else if ( ifile >> pdb[size].atom_number
                           >> pdb[size].element
                           >> pdb[size].type
@@ -45,8 +46,10 @@ bool read_pdb ( string pdbfilename, int & size ) {
                           >> pdb[size].z_coord
                           >> pdb[size].ligand_distance
                           >> pdb[size].score) {
-            size++;
+
             pdb.push_back(Atom());
+            size++;
+
 
         } else {
 
@@ -58,28 +61,29 @@ bool read_pdb ( string pdbfilename, int & size ) {
 }
 
 bool write_pdb ( string pdboutname, string stripcommand ) {
-
+    cout << "Writing stripped pdb file: " << endl;
     ofstream ofile;
     ofile.open( pdboutname );
     if ( !ofile.is_open() ) {
         return false;
     }
-    for ( int i = 0; i < number_of_atoms; i++ ) {
+    int i = 0;
+    for ( vector<Atom>::iterator it = pdb.begin(); it < pdb.end(); it++) {
 
         if (!(pdb[i].type == stripcommand)) {
-
-            ofile << setw(9) << left << pdb[i].atom_type
-              << setw(4) << left << pdb[i].atom_number
-              << setw(6) << left << pdb[i].element
-              << setw(7) << left << pdb[i].type
-              << setw(8) << left << pdb[i].residue_number
-              << setw(8) << left << pdb[i].x_coord
-              << setw(8) << left << pdb[i].y_coord
+            ofile << setw(5) << left << pdb[i].atom_type
+              << setw(6) << right << pdb[i].atom_number
+              << setw(4) << left << pdb[i].element
+              << setw(5) << right << pdb[i].type
+              << setw(6) << right << pdb[i].residue_number
+              << setw(12) << right << pdb[i].x_coord
+              << setw(8) << right << pdb[i].y_coord
               << setw(8) << right << pdb[i].z_coord
               << setw(6) << right << pdb[i].ligand_distance
               << setw(6) << right << pdb[i].score
               << endl;
         }
+        i++;
     }
 
     return true;

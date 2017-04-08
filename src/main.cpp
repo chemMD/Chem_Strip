@@ -56,11 +56,9 @@ int main( int argc, char* argv[] ) {
         cout << "Problems writing pdb file: " << i.pdbfilename << endl;
         return 0;
     }
-
-    Mdcrd m;
-
-    if ( !m.read_mdcrd( i.mdcrdfilename, m.mdcrd, number_of_atoms ) ) {
-        cout << "Problems opening mdcrd file: " << m.mdcrdfilename << endl;
+    cout << number_of_atoms << endl;
+    if ( !read_mdcrd( i.mdcrdfilename, number_of_atoms ) ) {
+        cout << "Problems opening mdcrd file: " << i.mdcrdfilename << endl;
         return 0;
     }
 

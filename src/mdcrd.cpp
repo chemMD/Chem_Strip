@@ -11,13 +11,12 @@ using namespace std;
 
 #include "input.h"
 #include "mdcrd.h"
+#include "pdb.h"
 
-int Mdcrd::number_of_coordinates;
-Mdcrd::Coordinates mdcrd[5272];
-string Mdcrd::mdcrdfilename;
-string Mdcrd::mdcrdoutname;
+vector<Coordinates> mdcrd;
+bool read_mdcrd ( string mdcrdfilename, int number_of_atoms ) {
 
-bool Mdcrd::read_mdcrd ( string mdcrdfilename, Coordinates mdcrd[5272], int & size ) {
+    int size;
 
     ifstream parmfile( mdcrdfilename );
 
@@ -26,30 +25,31 @@ bool Mdcrd::read_mdcrd ( string mdcrdfilename, Coordinates mdcrd[5272], int & si
     if (!(parmfile.is_open())) {
 
         return false;
-
     } else {
+        mdcrd.push_back(Coordinates());
+        for( int i = 0; size < ( number_of_atoms + 1 ); i++ ) {
 
-        for( int i = 0; i < 5272; i = i + 1 ) {
+            string firstresiduename;
 
-            parmfile >> mdcrd[size].X;
+            if ( i == 0  ){
 
-            if ( i == 1 ) {
-
+                parmfile >> firstresiduename;
                 continue;
 
-            } else if (parmfile >> mdcrd[size].X >> mdcrd[size].Y >> mdcrd[size].Z) {
+            } else if ( parmfile >> mdcrd[size].X >> mdcrd[size].Y >> mdcrd[size].Z ) {
 
                 cout << setw(8) << left << mdcrd[size].X
                      << setw(8) << left << mdcrd[size].Y
                      << setw(8) << left << mdcrd[size].Z << endl;
+
                 size++;
+                mdcrd.push_back(Coordinates());
 
             } else {
 
                 break;
             }
         }
-
     return true;
     }
 }

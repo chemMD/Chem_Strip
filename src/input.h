@@ -8,16 +8,15 @@
 #include <ctype.h>
 #include <iomanip>
 
-class Input {
-
-    public:
-        string inputfilename;
-        string inputArray[5];
+struct input {
         string pdbfilename;
         string pdboutname;
         string mdcrdfilename;
+        string mdcrdoutname;
         string stripcommand;
+        int time_steps;
         string rdfcommand;
-        bool read_input(string inputfilename);
 
 };
+extern input i;
+bool read_input( string inputfilename );

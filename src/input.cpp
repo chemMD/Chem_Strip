@@ -12,31 +12,29 @@ using namespace std;
 
 #include "input.h"
 
-bool Input::read_input( string inputfilename ) {
+input i;
+
+bool read_input( string inputfilename ) {
 
     ifstream file;
 
-    cout << "Enter input file name: " ;  
-    cin >> inputfilename;
     file.open( inputfilename.c_str() );
 
     if( !file.is_open() ) {
 
         return false;
 
+    } else if ( !( file >> i.pdbfilename
+              >> i.pdboutname
+              >> i.mdcrdfilename
+              >> i.mdcrdoutname
+              >> i.stripcommand
+              >> i.time_steps
+              >> i.rdfcommand ) ){
+
+        cout << "Input file has improper format" << endl;
+        return false;
     }
-    for( int i = 0; i < 5; ++i ) {
-
-        file >> inputArray[i];
-
-    }
-
-    pdbfilename   = inputArray[0];
-    pdboutname    = inputArray[1];
-    mdcrdfilename = inputArray[2];
-    stripcommand  = inputArray[3];
-    rdfcommand    = inputArray[4];
-
     return true;
 
 }

@@ -1,4 +1,4 @@
 example.pdb out.pdb
-example.mdcrd
-WAT
+example.mdcrd out.mdcrd
+WAT 2
 NH3@O

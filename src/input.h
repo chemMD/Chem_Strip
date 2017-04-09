@@ -14,6 +14,7 @@ struct input {
         string mdcrdfilename;
         string mdcrdoutname;
         string stripcommand;
+        int time_steps;
         string rdfcommand;
 
 };

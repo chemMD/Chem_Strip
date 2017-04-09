@@ -58,7 +58,7 @@ int main( int argc, char* argv[] ) {
         return 0;
     }
     cout << number_of_atoms << endl;
-    if ( !read_mdcrd( i.mdcrdfilename, number_of_atoms ) ) {
+    if ( !read_mdcrd( i.mdcrdfilename, i.time_steps, number_of_atoms ) ) {
         cout << "Problems opening mdcrd file: " << i.mdcrdfilename << endl;
         return 0;
     }

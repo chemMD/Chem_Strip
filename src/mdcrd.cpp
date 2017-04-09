@@ -14,7 +14,7 @@ using namespace std;
 #include "pdb.h"
 
 vector<Coordinates> mdcrd;
-bool read_mdcrd ( string mdcrdfilename, int number_of_atoms ) {
+bool read_mdcrd ( string mdcrdfilename, int time_steps, int number_of_atoms ) {
 
     int size;
 
@@ -27,26 +27,26 @@ bool read_mdcrd ( string mdcrdfilename, int number_of_atoms ) {
 
 
         size =0;
-        for( int j = 1; j < 3; j++ ) {
-        for( int i = 0; size < ( ( number_of_atoms + 1 ) * j ); i++ ) {
+        for( int j = 1; j < (time_steps + 1); j++ ) {
+            for( int i = 0; size < ( ( number_of_atoms + 1 ) * j ); i++ ) {
 
-            string firstresiduename;
-            mdcrd.push_back(Coordinates());
+                string firstresiduename;
+                mdcrd.push_back(Coordinates());
 
-            if ( j == 1 && i == 0  ){
+                if ( j == 1 && i == 0  ){
 
-                parmfile >> firstresiduename;
-                continue;
+                    parmfile >> firstresiduename;
+                    continue;
 
-            } else if ( parmfile >> mdcrd[size].X >> mdcrd[size].Y >> mdcrd[size].Z ) {
+                } else if ( parmfile >> mdcrd[size].X >> mdcrd[size].Y >> mdcrd[size].Z ) {
 
-                size++;
+                    size++;
 
-            } else {
-                mdcrd.pop_back();
-                break;
+                } else {
+                    mdcrd.pop_back();
+                    break;
+                }
             }
-        }
         }
     return true;
     }

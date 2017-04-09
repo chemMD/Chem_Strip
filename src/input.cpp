@@ -29,6 +29,7 @@ bool read_input( string inputfilename ) {
               >> i.mdcrdfilename
               >> i.mdcrdoutname
               >> i.stripcommand
+              >> i.time_steps
               >> i.rdfcommand ) ){
 
         cout << "Input file has improper format" << endl;

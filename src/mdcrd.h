@@ -15,6 +15,6 @@ struct Coordinates {
 };
 
 extern vector<Coordinates> mdcrd;
-bool read_mdcrd (string mdcrdfilename, int number_of_atoms );
+bool read_mdcrd (string mdcrdfilename,int time_steps, int number_of_atoms );
 bool write_mdcrd (string mdcrdoutname );
 

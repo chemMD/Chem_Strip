@@ -27,6 +27,7 @@ bool read_input( string inputfilename ) {
     } else if ( !( file >> i.pdbfilename
               >> i.pdboutname
               >> i.mdcrdfilename
+              >> i.mdcrdoutname
               >> i.stripcommand
               >> i.rdfcommand ) ){
 

@@ -12,6 +12,7 @@ struct input {
         string pdbfilename;
         string pdboutname;
         string mdcrdfilename;
+        string mdcrdoutname;
         string stripcommand;
         string rdfcommand;
 

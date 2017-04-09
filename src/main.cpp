@@ -42,6 +42,7 @@ int main( int argc, char* argv[] ) {
     cout << i.pdbfilename << endl;
     cout << i.pdboutname << endl;
     cout << i.mdcrdfilename << endl;
+    cout << i.mdcrdoutname << endl;
     cout << i.stripcommand << endl;
     cout << i.rdfcommand << endl;
 
@@ -61,6 +62,9 @@ int main( int argc, char* argv[] ) {
         cout << "Problems opening mdcrd file: " << i.mdcrdfilename << endl;
         return 0;
     }
-
+    if ( !write_mdcrd( i.mdcrdoutname ) ) {
+            cout << "Problems writing mdcrd file: " << i.pdbfilename << endl;
+            return 0;
+        }
     return 0;
 }

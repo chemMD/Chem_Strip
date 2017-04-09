@@ -15,7 +15,6 @@ struct Coordinates {
 };
 
 extern vector<Coordinates> mdcrd;
-//static string mdcrdoutname;
 bool read_mdcrd (string mdcrdfilename, int number_of_atoms );
-//bool write_mdcrd (string mdcrdoutname, string stripcommand, Atom pdb[5272], int number_of_atoms);
+bool write_mdcrd (string mdcrdoutname );
 

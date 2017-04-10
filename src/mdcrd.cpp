@@ -32,25 +32,29 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps, int number_of_atoms ) {
         for( int j = 1; j < (time_steps + 1); j++ ) {
             for( int i = 0; size < ( ( number_of_atoms + 1 ) * j ); i++ ) {
 
-                string firstresiduename;
                 mdcrd.push_back(Coordinates());
+                string firstresiduename;
                 if ( j == 1 && i == 0  ){
 
                     parmfile >> firstresiduename;
                     continue;
 
+                } else if ( size == ( number_of_atoms ) * j ) {
+
+                    per_box_bound.push_back(Coordinates());
+                    parmfile >> per_box_bound[j-1].X
+                             >> per_box_bound[j-1].Y
+                             >> per_box_bound[j-1].Z;
+                    cout << per_box_bound[j-1].X << per_box_bound[j-1].Y << per_box_bound[j-1].Z << endl;
+                    break;
+
                 } else if ( parmfile >> mdcrd[size].X >> mdcrd[size].Y >> mdcrd[size].Z ) {
+
                     size++;
                 }
-                if ( size == ( number_of_atoms + 1 ) * j ) {
-                    per_box_bound.push_back(Coordinates());
-                    per_box_bound[j-1].X = mdcrd[size -1 ].X;
-                    per_box_bound[j-1].Y = mdcrd[size -1 ].Y;
-                    per_box_bound[j-1].Z = mdcrd[size -1 ].Z;
-                    cout << per_box_bound[j-1].X << per_box_bound[j-1].Y << per_box_bound[j-1].Z << endl;
-                    mdcrd.pop_back();
-                }
+
             }
+        mdcrd.pop_back();
         }
     return true;
     }

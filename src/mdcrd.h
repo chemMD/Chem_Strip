@@ -17,5 +17,5 @@ struct Coordinates {
 extern vector<Coordinates> mdcrd;
 extern vector<Coordinates> per_box_bound;
 bool read_mdcrd (string mdcrdfilename,int time_steps, int number_of_atoms );
-bool write_mdcrd (string mdcrdoutname );
+bool write_mdcrd (string mdcrdoutname, int time_steps, int number_of_atoms);
 

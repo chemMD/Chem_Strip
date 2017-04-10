@@ -62,7 +62,7 @@ int main( int argc, char* argv[] ) {
         cout << "Problems opening mdcrd file: " << i.mdcrdfilename << endl;
         return 0;
     }
-    if ( !write_mdcrd( i.mdcrdoutname ) ) {
+    if ( !write_mdcrd( i.mdcrdoutname, i.time_steps, number_of_atoms) ) {
             cout << "Problems writing mdcrd file: " << i.pdbfilename << endl;
             return 0;
         }

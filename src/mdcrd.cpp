@@ -59,19 +59,35 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps, int number_of_atoms ) {
     return true;
     }
 }
-bool write_mdcrd ( string mdcrdoutname ) {
+bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms) {
     cout << "Writing stripped mdcrd file: "<< mdcrdoutname << endl;
     ofstream ofile;
     ofile.open( mdcrdoutname );
     if ( !ofile.is_open() ) {
         return false;
     }
+
     int i = 0;
-    for ( vector<Coordinates>::iterator it = mdcrd.begin(); it < (mdcrd.end() - 1); it++) {
-            ofile << setw(8) << left << mdcrd[i].X
-                  << setw(8) << left << mdcrd[i].Y
-                  << setw(8) << left << mdcrd[i].Z << endl;
-        i++;
+    int strip_index_it;
+
+    for (int j = 1; j < ( time_steps + 1 ); j++) {
+        strip_index_it = 0;
+        cout<< strip_index[strip_index_it] << endl;
+        for ( vector<Coordinates>::iterator it = mdcrd.begin(); i < ( number_of_atoms * j ); it++) {
+
+            if (!( i == ( strip_index[strip_index_it] + ( number_of_atoms * (j -1 ) ) ) ) ) {
+
+                ofile << setw(8) << left << mdcrd[i].X
+                      << setw(8) << left << mdcrd[i].Y
+                      << setw(8) << left << mdcrd[i].Z << endl;
+                i++;
+
+            } else {
+
+                strip_index_it++;
+                i++;
+            }
+        }
     }
     return true;
 }

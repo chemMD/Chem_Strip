@@ -13,12 +13,12 @@ using namespace std;
 #include "pdb.h"
 
 vector<Atom> pdb;
+vector<int> strip_index;
 
 bool read_pdb ( string pdbfilename, int & size ) {
 
     ifstream ifile( pdbfilename );
     string ter = "TER";
-
 
     size = 0;
 
@@ -68,6 +68,8 @@ bool write_pdb ( string pdboutname, string stripcommand ) {
         return false;
     }
     int i = 0;
+    int strip_index_it = 0;
+
     for ( vector<Atom>::iterator it = pdb.begin(); it < pdb.end(); it++) {
 
         if (!(pdb[i].type == stripcommand)) {
@@ -82,7 +84,13 @@ bool write_pdb ( string pdboutname, string stripcommand ) {
               << setw(6) << right << pdb[i].ligand_distance
               << setw(6) << right << pdb[i].score
               << endl;
+        } else {
+
+            strip_index.push_back(int());
+            strip_index[strip_index_it] = i;
+            strip_index_it++;
         }
+
         i++;
     }
 

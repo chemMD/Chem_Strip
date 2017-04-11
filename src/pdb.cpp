@@ -88,7 +88,6 @@ bool write_pdb ( string pdboutname, string stripcommand ) {
 
             strip_index.push_back(int());
             strip_index[strip_index_it] = i;
-            cout<< strip_index[strip_index_it] << endl;
             strip_index_it++;
         }
 

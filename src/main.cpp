@@ -34,6 +34,7 @@ using namespace std;
 int main( int argc, char* argv[] ) {
 
     cout << "Initializing main..." << endl;
+
     if ( !read_input( argv[1] ) ) {
         cout << "Problems opening input file: " << argv[1] << endl;
         return 0;
@@ -57,14 +58,18 @@ int main( int argc, char* argv[] ) {
         cout << "Problems writing pdb file: " << i.pdbfilename << endl;
         return 0;
     }
+
     cout << number_of_atoms << endl;
+
     if ( !read_mdcrd( i.mdcrdfilename, i.time_steps, number_of_atoms ) ) {
         cout << "Problems opening mdcrd file: " << i.mdcrdfilename << endl;
         return 0;
     }
+
     if ( !write_mdcrd( i.mdcrdoutname, i.time_steps, number_of_atoms) ) {
             cout << "Problems writing mdcrd file: " << i.pdbfilename << endl;
             return 0;
         }
+
     return 0;
 }

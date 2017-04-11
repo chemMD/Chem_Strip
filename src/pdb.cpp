@@ -61,12 +61,15 @@ bool read_pdb ( string pdbfilename, int & size ) {
 }
 
 bool write_pdb ( string pdboutname, string stripcommand ) {
+
     cout << "Writing stripped pdb file: " << endl;
     ofstream ofile;
+
     ofile.open( pdboutname );
     if ( !ofile.is_open() ) {
         return false;
     }
+
     int i = 0;
     int strip_index_it = 0;
 
@@ -84,6 +87,7 @@ bool write_pdb ( string pdboutname, string stripcommand ) {
               << setw(6) << right << pdb[i].ligand_distance
               << setw(6) << right << pdb[i].score
               << endl;
+
         } else {
 
             strip_index.push_back(int());

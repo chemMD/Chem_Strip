@@ -31,7 +31,9 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps, int number_of_atoms ) {
     } else {
 
         size =0;
+
         for( int j = 1; j < (time_steps + 1); j++ ) {
+
             for( int i = 0; size < ( ( number_of_atoms + 1 ) * j ); i++ ) {
 
                 mdcrd.push_back(Coordinates());
@@ -55,8 +57,10 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps, int number_of_atoms ) {
                 }
 
             }
+
         mdcrd.pop_back();
         }
+
     return true;
     }
 }
@@ -110,18 +114,21 @@ bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms) {
         for ( vector<Coordinates>::iterator it = mdcrd.begin(); i < ( number_of_atoms * j ); it++) {
 
             if (!( i == ( strip_index[strip_index_it] + ( number_of_atoms * (j -1) ) ) ) ) {
+
                 if ( i == ( x_print_form[x] + number_of_atoms * ( j - 1 ) ) ) {
 
                     ofile << setw(8) << right << mdcrd[i].X << '\n'
                           << setw(8) << right << mdcrd[i].Y
                           << setw(8) << right << mdcrd[i].Z;
                     x++;
+
                 } else if ( i == ( y_print_form[y] + number_of_atoms * ( j - 1 ) ) ) {
 
                     ofile << setw(8) << right << mdcrd[i].X
                           << setw(8) << right << mdcrd[i].Y << '\n'
                           << setw(8) << right << mdcrd[i].Z;
                     y++;
+
                 } else if ( i == ( z_print_form[z] + number_of_atoms * ( j - 1 ) ) ) {
 
                     ofile << setw(8) << right << mdcrd[i].X
@@ -135,6 +142,7 @@ bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms) {
                           << setw(8) << right << mdcrd[i].Y
                           << setw(8) << right << mdcrd[i].Z;
                 }
+
             i++;
 
             } else {

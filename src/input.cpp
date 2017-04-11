@@ -36,5 +36,4 @@ bool read_input( string inputfilename ) {
         return false;
     }
     return true;
-
 }

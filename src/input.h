@@ -18,5 +18,6 @@ struct input {
         string rdfcommand;
 
 };
+
 extern input i;
 bool read_input( string inputfilename );

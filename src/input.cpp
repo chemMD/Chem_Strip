@@ -12,9 +12,7 @@ using namespace std;
 
 #include "input.h"
 
-input inp;
-
-bool read_input( string inputfilename ) {
+bool read_input( string inputfilename, Input *inp) {
 
     ifstream file;
 
@@ -24,13 +22,13 @@ bool read_input( string inputfilename ) {
 
         return false;
 
-    } else if ( !( file >> inp.pdbfilename
-              >> inp.pdboutname
-              >> inp.mdcrdfilename
-              >> inp.mdcrdoutname
-              >> inp.stripcommand
-              >> inp.time_steps
-              >> inp.rdfcommand ) ){
+    } else if ( !( file >> inp->pdbfilename
+              >> inp->pdboutname
+              >> inp->mdcrdfilename
+              >> inp->mdcrdoutname
+              >> inp->stripcommand
+              >> inp->time_steps
+              >> inp->rdfcommand ) ){
 
         cout << "Input file has improper format" << endl;
         return false;

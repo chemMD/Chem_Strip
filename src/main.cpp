@@ -35,39 +35,42 @@ int main( int argc, char* argv[] ) {
 
     cout << "Initializing main..." << endl;
 
-    if ( !read_input( argv[1] ) ) {
+    struct Input input;
+    struct Input* inp = &input;
+
+    if ( !read_input( argv[1], inp ) ) {
         cout << "Problems opening input file: " << argv[1] << endl;
         return 0;
     }
 
-    cout << inp.pdbfilename << endl;
-    cout << inp.pdboutname << endl;
-    cout << inp.mdcrdfilename << endl;
-    cout << inp.mdcrdoutname << endl;
-    cout << inp.stripcommand << endl;
-    cout << inp.rdfcommand << endl;
+    cout << inp->pdbfilename << endl;
+    cout << inp->pdboutname << endl;
+    cout << inp->mdcrdfilename << endl;
+    cout << inp->mdcrdoutname << endl;
+    cout << inp->stripcommand << endl;
+    cout << inp->rdfcommand << endl;
 
-    if ( !read_pdb( inp.pdbfilename, number_of_atoms) ) {
-        cout << "Problems opening pdb file: " << inp.pdbfilename << endl;
+    if ( !read_pdb( inp->pdbfilename, number_of_atoms) ) {
+        cout << "Problems opening pdb file: " << inp->pdbfilename << endl;
         return 0;
     }
 
     cout << "Number of atoms: " << number_of_atoms << endl;
 
-    if ( !write_pdb( inp.pdboutname, inp.stripcommand ) ) {
-        cout << "Problems writing pdb file: " << inp.pdbfilename << endl;
+    if ( !write_pdb( inp->pdboutname, inp->stripcommand ) ) {
+        cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
         return 0;
     }
 
     cout << number_of_atoms << endl;
 
-    if ( !read_mdcrd( inp.mdcrdfilename, inp.time_steps, number_of_atoms ) ) {
-        cout << "Problems opening mdcrd file: " << inp.mdcrdfilename << endl;
+    if ( !read_mdcrd( inp->mdcrdfilename, inp->time_steps, number_of_atoms ) ) {
+        cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
         return 0;
     }
 
-    if ( !write_mdcrd( inp.mdcrdoutname, inp.time_steps, number_of_atoms) ) {
-            cout << "Problems writing mdcrd file: " << inp.pdbfilename << endl;
+    if ( !write_mdcrd( inp->mdcrdoutname, inp->time_steps, number_of_atoms) ) {
+            cout << "Problems writing mdcrd file: " << inp->pdbfilename << endl;
             return 0;
         }
 

@@ -8,7 +8,7 @@
 #include <ctype.h>
 #include <iomanip>
 
-struct input {
+struct Input {
         string pdbfilename;
         string pdboutname;
         string mdcrdfilename;
@@ -19,5 +19,4 @@ struct input {
 
 };
 
-extern input inp;
-bool read_input( string inputfilename );
+bool read_input( string inputfilename, Input *inp );

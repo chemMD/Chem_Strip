@@ -19,5 +19,5 @@ struct input {
 
 };
 
-extern input i;
+extern input inp;
 bool read_input( string inputfilename );

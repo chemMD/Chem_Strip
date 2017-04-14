@@ -40,34 +40,34 @@ int main( int argc, char* argv[] ) {
         return 0;
     }
 
-    cout << i.pdbfilename << endl;
-    cout << i.pdboutname << endl;
-    cout << i.mdcrdfilename << endl;
-    cout << i.mdcrdoutname << endl;
-    cout << i.stripcommand << endl;
-    cout << i.rdfcommand << endl;
+    cout << inp.pdbfilename << endl;
+    cout << inp.pdboutname << endl;
+    cout << inp.mdcrdfilename << endl;
+    cout << inp.mdcrdoutname << endl;
+    cout << inp.stripcommand << endl;
+    cout << inp.rdfcommand << endl;
 
-    if ( !read_pdb( i.pdbfilename, number_of_atoms) ) {
-        cout << "Problems opening pdb file: " << i.pdbfilename << endl;
+    if ( !read_pdb( inp.pdbfilename, number_of_atoms) ) {
+        cout << "Problems opening pdb file: " << inp.pdbfilename << endl;
         return 0;
     }
 
     cout << "Number of atoms: " << number_of_atoms << endl;
 
-    if ( !write_pdb( i.pdboutname, i.stripcommand ) ) {
-        cout << "Problems writing pdb file: " << i.pdbfilename << endl;
+    if ( !write_pdb( inp.pdboutname, inp.stripcommand ) ) {
+        cout << "Problems writing pdb file: " << inp.pdbfilename << endl;
         return 0;
     }
 
     cout << number_of_atoms << endl;
 
-    if ( !read_mdcrd( i.mdcrdfilename, i.time_steps, number_of_atoms ) ) {
-        cout << "Problems opening mdcrd file: " << i.mdcrdfilename << endl;
+    if ( !read_mdcrd( inp.mdcrdfilename, inp.time_steps, number_of_atoms ) ) {
+        cout << "Problems opening mdcrd file: " << inp.mdcrdfilename << endl;
         return 0;
     }
 
-    if ( !write_mdcrd( i.mdcrdoutname, i.time_steps, number_of_atoms) ) {
-            cout << "Problems writing mdcrd file: " << i.pdbfilename << endl;
+    if ( !write_mdcrd( inp.mdcrdoutname, inp.time_steps, number_of_atoms) ) {
+            cout << "Problems writing mdcrd file: " << inp.pdbfilename << endl;
             return 0;
         }
 

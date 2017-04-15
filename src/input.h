@@ -9,6 +9,7 @@
 #include <iomanip>
 
 struct Input {
+
         string pdbfilename;
         string pdboutname;
         string mdcrdfilename;
@@ -16,7 +17,6 @@ struct Input {
         string stripcommand;
         int time_steps;
         string rdfcommand;
-
 };
 
 bool read_input( string inputfilename, Input *inp );

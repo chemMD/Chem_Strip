@@ -35,8 +35,8 @@ int main( int argc, char* argv[] ) {
 
     cout << "Initializing main..." << endl;
 
-    struct Input input;
-    struct Input* inp = &input;
+    Input input;
+    Input* inp = &input;
 
     if ( !read_input( argv[1], inp ) ) {
         cout << "Problems opening input file: " << argv[1] << endl;
@@ -50,14 +50,22 @@ int main( int argc, char* argv[] ) {
     cout << inp->stripcommand << endl;
     cout << inp->rdfcommand << endl;
 
-    if ( !read_pdb( inp->pdbfilename, number_of_atoms) ) {
+    int number_of_atoms;
+
+    vector<Atom> pdb;
+    vector<int> strip_index;
+    vector<int> rdf_solute;
+    vector<int> rdf_solvent;
+
+    if ( !read_pdb( inp->pdbfilename, number_of_atoms, pdb) ) {
         cout << "Problems opening pdb file: " << inp->pdbfilename << endl;
         return 0;
     }
+    cout << pdb[0].atom_type << endl;
 
     cout << "Number of atoms: " << number_of_atoms << endl;
 
-    if ( !write_pdb( inp->pdboutname, inp->stripcommand ) ) {
+    if ( !write_pdb( inp->pdboutname, inp->stripcommand, pdb, strip_index ) ) {
         cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
         return 0;
     }
@@ -69,10 +77,10 @@ int main( int argc, char* argv[] ) {
         return 0;
     }
 
-    if ( !write_mdcrd( inp->mdcrdoutname, inp->time_steps, number_of_atoms) ) {
+    if ( !write_mdcrd( inp->mdcrdoutname, inp->time_steps, number_of_atoms, strip_index ) ) {
             cout << "Problems writing mdcrd file: " << inp->pdbfilename << endl;
             return 0;
-        }
+    }
 
     return 0;
 }

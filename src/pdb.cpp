@@ -12,10 +12,7 @@ using namespace std;
 #include "input.h"
 #include "pdb.h"
 
-vector<Atom> pdb;
-vector<int> strip_index;
-
-bool read_pdb ( string pdbfilename, int & size ) {
+bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb ) {
 
     ifstream ifile( pdbfilename );
     string ter = "TER";
@@ -60,7 +57,7 @@ bool read_pdb ( string pdbfilename, int & size ) {
     return true;
 }
 
-bool write_pdb ( string pdboutname, string stripcommand ) {
+bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb, vector<int> & strip_index ) {
 
     cout << "Writing stripped pdb file: " << endl;
     ofstream ofile;

@@ -21,9 +21,5 @@ struct Atom {
     double score;
 };
 
-extern vector<Atom > pdb;
-extern vector<int> strip_index;
-static int number_of_atoms;
-
-bool read_pdb ( string pdbfilename, int & size );
-bool write_pdb ( string pdboutname, string stripcommand );
+bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb );
+bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb, vector<int> & strip );

@@ -42,28 +42,37 @@ int main( int argc, char* argv[] ) {
         cout << "Problems opening input file: " << argv[1] << endl;
         return 0;
     }
-
     cout << inp->pdbfilename << endl;
     cout << inp->pdboutname << endl;
     cout << inp->mdcrdfilename << endl;
     cout << inp->mdcrdoutname << endl;
     cout << inp->stripcommand << endl;
-    cout << inp->rdfcommand << endl;
+    cout << inp->rdf_solute << endl;
+    cout << inp->rdf_solute_atom << endl;
+    cout << inp->rdf_solvent << endl;
+    cout << inp->rdf_solvent_atom << endl;
 
     int number_of_atoms;
 
     vector<Atom> pdb;
     vector<int> strip_index;
+
     vector<int> rdf_solute;
     vector<int> rdf_solvent;
+    vector<int> rdf_solute_index;
+    vector<int> rdf_solvent_index;
 
     if ( !read_pdb( inp->pdbfilename, number_of_atoms, pdb) ) {
         cout << "Problems opening pdb file: " << inp->pdbfilename << endl;
         return 0;
     }
-    cout << pdb[0].atom_type << endl;
-
     cout << "Number of atoms: " << number_of_atoms << endl;
+
+    if ( !check_pdb( inp->rdf_solute, inp->rdf_solute_atom, inp->rdf_solvent,
+        inp->rdf_solvent_atom, pdb, rdf_solute_index, rdf_solvent_index ) ) {
+        cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
+        return 0;
+    }
 
     if ( !write_pdb( inp->pdboutname, inp->stripcommand, pdb, strip_index ) ) {
         cout << "Problems writing pdb file: " << inp->pdbfilename << endl;

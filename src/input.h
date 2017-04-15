@@ -16,7 +16,10 @@ struct Input {
         string mdcrdoutname;
         string stripcommand;
         int time_steps;
-        string rdfcommand;
+        string rdf_solute;
+        string rdf_solute_atom;
+        string rdf_solvent;
+        string rdf_solvent_atom;
 };
 
 bool read_input( string inputfilename, Input *inp );

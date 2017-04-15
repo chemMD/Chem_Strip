@@ -28,10 +28,14 @@ bool read_input( string inputfilename, Input *inp) {
               >> inp->mdcrdoutname
               >> inp->stripcommand
               >> inp->time_steps
-              >> inp->rdfcommand ) ){
+              >> inp->rdf_solute
+              >> inp->rdf_solute_atom
+              >> inp->rdf_solvent
+              >> inp->rdf_solvent_atom ) ){
 
         cout << "Input file has improper format" << endl;
         return false;
     }
+
     return true;
 }

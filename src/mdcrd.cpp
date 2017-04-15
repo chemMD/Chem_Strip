@@ -13,12 +13,11 @@ using namespace std;
 #include "mdcrd.h"
 #include "pdb.h"
 
-vector<Coordinates> mdcrd;
-vector<Coordinates> per_box_bound;
-
 string firstresiduename;
 
-bool read_mdcrd ( string mdcrdfilename, int time_steps, int number_of_atoms ) {
+bool read_mdcrd ( string mdcrdfilename, int time_steps,
+        int number_of_atoms,vector<Coordinates> & mdcrd,
+        vector<Coordinates> & per_box_bound ) {
 
     int size;
 
@@ -65,7 +64,9 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps, int number_of_atoms ) {
     }
 }
 
-bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms, vector<int> & strip ) {
+bool write_mdcrd ( string mdcrdoutname, int time_steps,
+        int number_of_atoms, vector<int> & strip,
+        vector<Coordinates> & mdcrd, vector<Coordinates> & per_box_bound ) {
 
     cout << "Writing stripped mdcrd file: "<< mdcrdoutname << endl;
 

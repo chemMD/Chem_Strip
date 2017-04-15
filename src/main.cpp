@@ -81,12 +81,17 @@ int main( int argc, char* argv[] ) {
 
     cout << number_of_atoms << endl;
 
-    if ( !read_mdcrd( inp->mdcrdfilename, inp->time_steps, number_of_atoms ) ) {
+    vector<Coordinates> mdcrd;
+    vector<Coordinates> per_box_bound;
+
+    if ( !read_mdcrd( inp->mdcrdfilename, inp->time_steps,
+            number_of_atoms, mdcrd, per_box_bound ) ) {
         cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
         return 0;
     }
 
-    if ( !write_mdcrd( inp->mdcrdoutname, inp->time_steps, number_of_atoms, strip_index ) ) {
+    if ( !write_mdcrd( inp->mdcrdoutname, inp->time_steps,
+            number_of_atoms, strip_index, mdcrd, per_box_bound ) ) {
             cout << "Problems writing mdcrd file: " << inp->pdbfilename << endl;
             return 0;
     }

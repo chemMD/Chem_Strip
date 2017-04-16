@@ -83,9 +83,17 @@ int main( int argc, char* argv[] ) {
 
     vector<Coordinates> mdcrd;
     vector<Coordinates> per_box_bound;
+    vector<Coordinates> rdf_solute_coord;
+    vector<Coordinates> rdf_solvent_coord;
 
     if ( !read_mdcrd( inp->mdcrdfilename, inp->time_steps,
             number_of_atoms, mdcrd, per_box_bound ) ) {
+        cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
+        return 0;
+    }
+
+    if ( !check_mdcrd( inp->mdcrdfilename, inp->time_steps,number_of_atoms,
+           rdf_solute_index, rdf_solvent_index, mdcrd, rdf_solute_coord, rdf_solvent_coord ) ) {
         cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
         return 0;
     }

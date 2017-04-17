@@ -1,3 +1,15 @@
+
+/**
+ * @short   input parameters
+ * @file    input.cpp
+ * @author  Caleb Gallops and Dennis Kennetz
+ *
+ * This file contains the read_input prototype. The read_input
+ * function is a boolean that uses a pointer to read the parameters
+ * into a struct.
+ */
+
+
 #include <stdlib.h>
 #include <string>
 #include <fstream>

@@ -1,3 +1,17 @@
+
+/**
+ * @short   process MDCRD
+ * @file    mdcrd.cpp
+ * @author  Caleb Gallops and Dennis Kennetz
+ *
+ * This file contains the prototypes read_mdcrd, check_mdcrd and write_mdcrd. T\
+he read_mdcrd
+* function is a boolean function that parses the MDCRD input file stream into \
+a vector
+* of a struct.
+*/
+
+
 #include <stdlib.h>
 #include <string>
 #include <fstream>

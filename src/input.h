@@ -1,3 +1,11 @@
+/**
+ * @short   input Headers
+ * @file    input.h
+ * @author  Caleb Gallops and Dennis Kennetz
+ *
+ * This header file contains the Input struct and the read_input function
+ * declaration.
+ */
 
 #include <stdlib.h>
 #include <string>

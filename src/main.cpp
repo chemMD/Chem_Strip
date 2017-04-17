@@ -31,6 +31,15 @@ using namespace std;
 #include "pdb.h"
 #include "mdcrd.h"
 
+/**
+ * @short   Main program
+ * @file    main.cpp
+ * @author  Caleb Gallops and Dennis Kennetz
+ * @param   none
+ * @return  0 on success
+ */
+
+
 int main( int argc, char* argv[] ) {
 
     cout << "Initializing main..." << endl;

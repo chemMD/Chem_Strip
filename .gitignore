@@ -1,1 +1,9 @@
 /Debug/
+*~
+*.o
+.cproject
+.project
+MD_strip
+html
+latex
+.settings

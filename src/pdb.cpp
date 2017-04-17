@@ -12,10 +12,7 @@ using namespace std;
 #include "input.h"
 #include "pdb.h"
 
-vector<Atom> pdb;
-vector<int> strip_index;
-
-bool read_pdb ( string pdbfilename, int & size ) {
+bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb ) {
 
     ifstream ifile( pdbfilename );
     string ter = "TER";
@@ -50,7 +47,6 @@ bool read_pdb ( string pdbfilename, int & size ) {
             pdb.push_back(Atom());
             size++;
 
-
         } else {
 
             break;
@@ -60,7 +56,95 @@ bool read_pdb ( string pdbfilename, int & size ) {
     return true;
 }
 
-bool write_pdb ( string pdboutname, string stripcommand ) {
+bool check_pdb ( string rdf_solute, string rdf_solute_atom,
+        string rdf_solvent, string rdf_solvent_atom, vector<Atom> & pdb,
+        vector<int> & rdf_solute_index, vector<int> & rdf_solvent_index ) {
+
+    cout << "Locating rdf atoms within file: " << endl;
+
+    int i = 0;
+    int rdf_solute_it = 0;
+
+    for ( vector<Atom>::iterator it = pdb.begin(); it < pdb.end(); it++) {
+
+        rdf_solute_index.push_back(int());
+
+        if ( !( pdb[i].type == rdf_solute && pdb[i].element == rdf_solute_atom ) ) {
+
+            i++;
+            continue;
+
+        } else {
+            cout << setw(5) << left << pdb[i].atom_type
+              << setw(6) << right << pdb[i].atom_number
+              << setw(4) << left << pdb[i].element
+              << setw(5) << right << pdb[i].type
+              << setw(6) << right << pdb[i].residue_number
+              << setw(12) << right << pdb[i].x_coord
+              << setw(8) << right << pdb[i].y_coord
+              << setw(8) << right << pdb[i].z_coord
+              << setw(6) << right << pdb[i].ligand_distance
+              << setw(6) << right << pdb[i].score
+              << endl;
+
+            rdf_solute_index.push_back(int());
+            rdf_solute_index[rdf_solute_it] = i;
+            cout << rdf_solute_index[rdf_solute_it] << endl;
+            rdf_solute_it++;
+            i++;
+        }
+    }
+
+    i = 0;
+    int rdf_solvent_it = 0;
+
+    for ( vector<Atom>::iterator it = pdb.begin(); it < pdb.end(); it++) {
+
+        rdf_solvent_index.push_back(int());
+
+        if ( !( pdb[i].type == rdf_solvent && pdb[i].element == rdf_solvent_atom ) ) {
+
+            i++;
+            continue;
+
+        } else {
+            cout << setw(5) << left << pdb[i].atom_type
+              << setw(6) << right << pdb[i].atom_number
+              << setw(4) << left << pdb[i].element
+              << setw(5) << right << pdb[i].type
+              << setw(6) << right << pdb[i].residue_number
+              << setw(12) << right << pdb[i].x_coord
+              << setw(8) << right << pdb[i].y_coord
+              << setw(8) << right << pdb[i].z_coord
+              << setw(6) << right << pdb[i].ligand_distance
+              << setw(6) << right << pdb[i].score
+              << endl;
+
+            rdf_solvent_index.push_back(int());
+            rdf_solvent_index[rdf_solvent_it] = i;
+            cout << rdf_solvent_index[rdf_solvent_it] << endl;
+            rdf_solvent_it++;
+            i++;
+        }
+    }
+
+    if (rdf_solute_it == 0 ) {
+
+        cout << "No solute present" << endl;
+        return false;
+
+    } else if (rdf_solvent_it == 0) {
+
+        cout << "No solvent present" << endl;
+        return false;
+
+    } else {
+
+    return true;
+    }
+}
+
+bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb, vector<int> & strip_index ) {
 
     cout << "Writing stripped pdb file: " << endl;
     ofstream ofile;

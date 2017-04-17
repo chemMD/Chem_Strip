@@ -13,12 +13,11 @@ using namespace std;
 #include "mdcrd.h"
 #include "pdb.h"
 
-vector<Coordinates> mdcrd;
-vector<Coordinates> per_box_bound;
-
 string firstresiduename;
 
-bool read_mdcrd ( string mdcrdfilename, int time_steps, int number_of_atoms ) {
+bool read_mdcrd ( string mdcrdfilename, int time_steps,
+        int number_of_atoms,vector<Coordinates> & mdcrd,
+        vector<Coordinates> & per_box_bound ) {
 
     int size;
 
@@ -65,7 +64,9 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps, int number_of_atoms ) {
     }
 }
 
-bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms) {
+bool write_mdcrd ( string mdcrdoutname, int time_steps,
+        int number_of_atoms, vector<int> & strip,
+        vector<Coordinates> & mdcrd, vector<Coordinates> & per_box_bound ) {
 
     cout << "Writing stripped mdcrd file: "<< mdcrdoutname << endl;
 
@@ -109,11 +110,11 @@ bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms) {
         z = 0;
 
         strip_index_it = 0;
-        cout<< strip_index[strip_index_it] << endl;
+        cout<< strip[strip_index_it] << endl;
 
         for ( vector<Coordinates>::iterator it = mdcrd.begin(); i < ( number_of_atoms * j ); it++) {
 
-            if (!( i == ( strip_index[strip_index_it] + ( number_of_atoms * (j -1) ) ) ) ) {
+            if (!( i == ( strip[strip_index_it] + ( number_of_atoms * (j -1) ) ) ) ) {
 
                 if ( i == ( x_print_form[x] + number_of_atoms * ( j - 1 ) ) ) {
 

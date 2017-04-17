@@ -17,3 +17,4 @@ clean :
 
 cleanall :
 	@- $(RM) $(program_OBJS)
+	rm -rf *~ html latex

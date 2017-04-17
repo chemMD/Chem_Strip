@@ -35,41 +35,66 @@ int main( int argc, char* argv[] ) {
 
     cout << "Initializing main..." << endl;
 
-    if ( !read_input( argv[1] ) ) {
+    Input input;
+    Input* inp = &input;
+
+    if ( !read_input( argv[1], inp ) ) {
         cout << "Problems opening input file: " << argv[1] << endl;
         return 0;
     }
+    cout << inp->pdbfilename << endl;
+    cout << inp->pdboutname << endl;
+    cout << inp->mdcrdfilename << endl;
+    cout << inp->mdcrdoutname << endl;
+    cout << inp->stripcommand << endl;
+    cout << inp->rdf_solute << endl;
+    cout << inp->rdf_solute_atom << endl;
+    cout << inp->rdf_solvent << endl;
+    cout << inp->rdf_solvent_atom << endl;
 
-    cout << i.pdbfilename << endl;
-    cout << i.pdboutname << endl;
-    cout << i.mdcrdfilename << endl;
-    cout << i.mdcrdoutname << endl;
-    cout << i.stripcommand << endl;
-    cout << i.rdfcommand << endl;
+    int number_of_atoms;
 
-    if ( !read_pdb( i.pdbfilename, number_of_atoms) ) {
-        cout << "Problems opening pdb file: " << i.pdbfilename << endl;
+    vector<Atom> pdb;
+    vector<int> strip_index;
+
+    vector<int> rdf_solute;
+    vector<int> rdf_solvent;
+    vector<int> rdf_solute_index;
+    vector<int> rdf_solvent_index;
+
+    if ( !read_pdb( inp->pdbfilename, number_of_atoms, pdb) ) {
+        cout << "Problems opening pdb file: " << inp->pdbfilename << endl;
+        return 0;
+    }
+    cout << "Number of atoms: " << number_of_atoms << endl;
+
+    if ( !check_pdb( inp->rdf_solute, inp->rdf_solute_atom, inp->rdf_solvent,
+        inp->rdf_solvent_atom, pdb, rdf_solute_index, rdf_solvent_index ) ) {
+        cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
         return 0;
     }
 
-    cout << "Number of atoms: " << number_of_atoms << endl;
-
-    if ( !write_pdb( i.pdboutname, i.stripcommand ) ) {
-        cout << "Problems writing pdb file: " << i.pdbfilename << endl;
+    if ( !write_pdb( inp->pdboutname, inp->stripcommand, pdb, strip_index ) ) {
+        cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
         return 0;
     }
 
     cout << number_of_atoms << endl;
 
-    if ( !read_mdcrd( i.mdcrdfilename, i.time_steps, number_of_atoms ) ) {
-        cout << "Problems opening mdcrd file: " << i.mdcrdfilename << endl;
+    vector<Coordinates> mdcrd;
+    vector<Coordinates> per_box_bound;
+
+    if ( !read_mdcrd( inp->mdcrdfilename, inp->time_steps,
+            number_of_atoms, mdcrd, per_box_bound ) ) {
+        cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
         return 0;
     }
 
-    if ( !write_mdcrd( i.mdcrdoutname, i.time_steps, number_of_atoms) ) {
-            cout << "Problems writing mdcrd file: " << i.pdbfilename << endl;
+    if ( !write_mdcrd( inp->mdcrdoutname, inp->time_steps,
+            number_of_atoms, strip_index, mdcrd, per_box_bound ) ) {
+            cout << "Problems writing mdcrd file: " << inp->pdbfilename << endl;
             return 0;
-        }
+    }
 
     return 0;
 }

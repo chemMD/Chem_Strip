@@ -88,9 +88,9 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
                 rdf_solute_coord[rdf_solute_it].Y = mdcrd[i].Y;
                 rdf_solute_coord[rdf_solute_it].Z = mdcrd[i].Z;
 
-                //cout << rdf_solute_coord[rdf_solute_it].X
-                //     << rdf_solute_coord[rdf_solute_it].Y
-                 //    << rdf_solute_coord[rdf_solute_it].Z << endl;
+                cout << rdf_solute_coord[rdf_solute_it].X
+                     << rdf_solute_coord[rdf_solute_it].Y
+                     << rdf_solute_coord[rdf_solute_it].Z << endl;
 
                 rdf_solute_it++;
                 i++;
@@ -105,6 +105,7 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
                 cout << rdf_solvent_coord[rdf_solvent_it].X
                      << rdf_solvent_coord[rdf_solvent_it].Y
                      << rdf_solvent_coord[rdf_solvent_it].Z << endl;
+
                 rdf_solvent_it++;
                 i++;
 

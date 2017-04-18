@@ -1,3 +1,15 @@
+/**
+ * @short   process PDB
+ * @file    pdb.cpp
+ * @author  Caleb Gallops and Dennis Kennetz
+ *
+ * This file contains the prototypes read_pdb, check_pdb and write_pdb. The rea\
+d_pdb
+* function is a boolean function that parses the PDB input file stream into a \
+vector
+* of a struct.
+*/
+
 #include <stdlib.h>
 #include <string>
 #include <fstream>
@@ -11,6 +23,17 @@ using namespace std;
 
 #include "input.h"
 #include "pdb.h"
+
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: This read_pdb function utilizes the Atom struct
+ *                   found in pdb.h and the vector-struct pdb declared
+ *                   in main program.
+ *
+ * Return             true on success
+ *
+ */
 
 bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb ) {
 
@@ -56,14 +79,27 @@ bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb ) {
     return true;
 }
 
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: This check_pdb function utilizes the Atom struct
+ *                   found in pdb.h. It also uses the vector-struct pdb, vector-int
+ *                   rdf_solute_index and vector-int rdf_solvent_index
+ *                   defined/declared in the main program.
+ *
+ * Return             true on success
+ *
+ */
+
 bool check_pdb ( string rdf_solute, string rdf_solute_atom,
         string rdf_solvent, string rdf_solvent_atom, vector<Atom> & pdb,
-        vector<int> & rdf_solute_index, vector<int> & rdf_solvent_index ) {
+        vector<int> & rdf_solute_index,int & rdf_solute_it,
+        vector<int> & rdf_solvent_index, int & rdf_solvent_it ) {
 
     cout << "Locating rdf atoms within file: " << endl;
 
     int i = 0;
-    int rdf_solute_it = 0;
+    rdf_solute_it = 0;
 
     for ( vector<Atom>::iterator it = pdb.begin(); it < pdb.end(); it++) {
 
@@ -96,7 +132,7 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
     }
 
     i = 0;
-    int rdf_solvent_it = 0;
+    rdf_solvent_it = 0;
 
     for ( vector<Atom>::iterator it = pdb.begin(); it < pdb.end(); it++) {
 
@@ -126,7 +162,9 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
             rdf_solvent_it++;
             i++;
         }
+
     }
+
 
     if (rdf_solute_it == 0 ) {
 
@@ -143,6 +181,17 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
     return true;
     }
 }
+
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: The write_pdb function utilizes the vector-struct
+ *                   pdb and the vector-int strip_index defined/declared in the 
+ *                   main program.
+ *
+ * Return             true on success
+ *
+ */
 
 bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb, vector<int> & strip_index ) {
 

@@ -31,6 +31,15 @@ using namespace std;
 #include "pdb.h"
 #include "mdcrd.h"
 
+/**
+ * @short   Main program
+ * @file    main.cpp
+ * @author  Caleb Gallops and Dennis Kennetz
+ * @param   none
+ * @return  0 on success
+ */
+
+
 int main( int argc, char* argv[] ) {
 
     cout << "Initializing main..." << endl;
@@ -61,6 +70,8 @@ int main( int argc, char* argv[] ) {
     vector<int> rdf_solvent;
     vector<int> rdf_solute_index;
     vector<int> rdf_solvent_index;
+    int rdf_solute_it;
+    int rdf_solvent_it;
 
     if ( !read_pdb( inp->pdbfilename, number_of_atoms, pdb) ) {
         cout << "Problems opening pdb file: " << inp->pdbfilename << endl;
@@ -69,10 +80,13 @@ int main( int argc, char* argv[] ) {
     cout << "Number of atoms: " << number_of_atoms << endl;
 
     if ( !check_pdb( inp->rdf_solute, inp->rdf_solute_atom, inp->rdf_solvent,
-        inp->rdf_solvent_atom, pdb, rdf_solute_index, rdf_solvent_index ) ) {
+        inp->rdf_solvent_atom, pdb, rdf_solute_index, rdf_solute_it, rdf_solvent_index, rdf_solvent_it ) ) {
         cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
         return 0;
     }
+
+    cout << rdf_solute_it << endl;
+    cout << rdf_solvent_it << endl;
 
     if ( !write_pdb( inp->pdboutname, inp->stripcommand, pdb, strip_index ) ) {
         cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
@@ -83,9 +97,17 @@ int main( int argc, char* argv[] ) {
 
     vector<Coordinates> mdcrd;
     vector<Coordinates> per_box_bound;
+    vector<Coordinates> rdf_solute_coord;
+    vector<Coordinates> rdf_solvent_coord;
 
     if ( !read_mdcrd( inp->mdcrdfilename, inp->time_steps,
             number_of_atoms, mdcrd, per_box_bound ) ) {
+        cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
+        return 0;
+    }
+
+    if ( !check_mdcrd( inp->mdcrdfilename, inp->time_steps,number_of_atoms,
+           rdf_solute_index, rdf_solvent_index, mdcrd, rdf_solute_coord, rdf_solvent_coord ) ) {
         cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
         return 0;
     }

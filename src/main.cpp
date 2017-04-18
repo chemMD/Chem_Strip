@@ -70,6 +70,8 @@ int main( int argc, char* argv[] ) {
     vector<int> rdf_solvent;
     vector<int> rdf_solute_index;
     vector<int> rdf_solvent_index;
+    int rdf_solute_it;
+    int rdf_solvent_it;
 
     if ( !read_pdb( inp->pdbfilename, number_of_atoms, pdb) ) {
         cout << "Problems opening pdb file: " << inp->pdbfilename << endl;
@@ -78,10 +80,13 @@ int main( int argc, char* argv[] ) {
     cout << "Number of atoms: " << number_of_atoms << endl;
 
     if ( !check_pdb( inp->rdf_solute, inp->rdf_solute_atom, inp->rdf_solvent,
-        inp->rdf_solvent_atom, pdb, rdf_solute_index, rdf_solvent_index ) ) {
+        inp->rdf_solvent_atom, pdb, rdf_solute_index, rdf_solute_it, rdf_solvent_index, rdf_solvent_it ) ) {
         cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
         return 0;
     }
+
+    cout << rdf_solute_it << endl;
+    cout << rdf_solvent_it << endl;
 
     if ( !write_pdb( inp->pdboutname, inp->stripcommand, pdb, strip_index ) ) {
         cout << "Problems writing pdb file: " << inp->pdbfilename << endl;

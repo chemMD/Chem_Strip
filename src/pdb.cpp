@@ -1,4 +1,3 @@
-
 /**
  * @short   process PDB
  * @file    pdb.cpp
@@ -10,7 +9,6 @@ d_pdb
 vector
 * of a struct.
 */
-
 
 #include <stdlib.h>
 #include <string>
@@ -95,12 +93,13 @@ bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb ) {
 
 bool check_pdb ( string rdf_solute, string rdf_solute_atom,
         string rdf_solvent, string rdf_solvent_atom, vector<Atom> & pdb,
-        vector<int> & rdf_solute_index, vector<int> & rdf_solvent_index ) {
+        vector<int> & rdf_solute_index,int & rdf_solute_it,
+        vector<int> & rdf_solvent_index, int & rdf_solvent_it ) {
 
     cout << "Locating rdf atoms within file: " << endl;
 
     int i = 0;
-    int rdf_solute_it = 0;
+    rdf_solute_it = 0;
 
     for ( vector<Atom>::iterator it = pdb.begin(); it < pdb.end(); it++) {
 
@@ -133,7 +132,7 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
     }
 
     i = 0;
-    int rdf_solvent_it = 0;
+    rdf_solvent_it = 0;
 
     for ( vector<Atom>::iterator it = pdb.begin(); it < pdb.end(); it++) {
 
@@ -163,7 +162,9 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
             rdf_solvent_it++;
             i++;
         }
+
     }
+
 
     if (rdf_solute_it == 0 ) {
 

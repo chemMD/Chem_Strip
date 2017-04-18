@@ -1,4 +1,3 @@
-
 /**
  * @short   process MDCRD
  * @file    mdcrd.cpp
@@ -79,7 +78,7 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps,
 }
 
 bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
-        vector<int> & rdf_solute_index, vector<int> & rdf_solvent_index, vector<Coordinates> & mdcrd,
+        vector<int> & rdf_solute_index,vector<int> & rdf_solvent_index, vector<Coordinates> & mdcrd,
         vector<Coordinates> & rdf_solute_coord, vector<Coordinates> & rdf_solvent_coord ) {
 
     cout << "Writing stripped mdcrd file: "<< mdcrdoutname << endl;

@@ -3,12 +3,10 @@
  * @file    mdcrd.cpp
  * @author  Caleb Gallops and Dennis Kennetz
  *
- * This file contains the prototypes read_mdcrd, check_mdcrd and write_mdcrd. T\
-he read_mdcrd
-* function is a boolean function that parses the MDCRD input file stream into \
-a vector
-* of a struct.
-*/
+ * This file contains the prototypes read_mdcrd, check_mdcrd and write_mdcrd. The read_mdcrd
+ * function is a boolean function that parses the MDCRD input file stream into a vector
+ * of a struct.
+ */
 
 
 #include <stdlib.h>
@@ -171,7 +169,7 @@ bool write_mdcrd ( string mdcrdoutname, int time_steps,
 
     ofile << setw(80) << left << firstresiduename << endl;
 
-    for ( int j = 1; j < 3; j++ ) {
+    for ( int j = 1; j < ( time_steps + 1 ) ; j++ ) {
 
         x = 0;
         y = 0;

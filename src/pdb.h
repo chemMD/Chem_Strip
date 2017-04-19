@@ -21,6 +21,17 @@ struct Atom {
     double score;
 };
 
+struct Box {
+    vector<Atom> pdb;
+    vector<int> strip_index;
+    int number_of_atoms;
+    vector<int> rdf_solute;
+    vector<int> rdf_solvent;
+    vector<int> rdf_solute_index;
+    vector<int> rdf_solvent_index;
+    int rdf_solute_it;
+    int rdf_solvent_it;
+};
 bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb );
 bool check_pdb ( string rdf_solute, string rdf_solute_atom,
         string rdf_solvent, string rdf_solvent_atom, vector<Atom> & pdb,

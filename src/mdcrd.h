@@ -13,6 +13,13 @@ struct Coordinates {
     double Y;
     double Z;
 };
+struct Trajectory{
+    vector<Coordinates> mdcrd;
+    vector<Coordinates> per_box_bound;
+    vector<Coordinates> rdf_solute_coord;
+    vector<Coordinates> rdf_solvent_coord;
+
+};
 
 bool check_mdcrd ( string mdcrdoutname, int time_steps,
         int number_of_atoms, vector<int> & rdf_solute_index,

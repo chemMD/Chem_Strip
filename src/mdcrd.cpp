@@ -87,12 +87,12 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
     int rdf_solute_it;
     int rdf_solvent_it;
 
-    for ( int j = 1; j < 3; j++ ) {
+    for ( int j = 1; j < ( time_steps + 1 ); j++ ) {
 
         rdf_solute_it = 0;
         rdf_solvent_it = 0;
 
-        for ( vector<Coordinates>::iterator it = mdcrd.begin(); i < ( number_of_atoms * j ); it++) {
+        for ( vector<Coordinates>::iterator it = mdcrd.begin(); i < ( number_of_atoms * j ); it++ ) {
 
             if ( i == ( rdf_solute_index[rdf_solute_it] + ( number_of_atoms * (j -1) ) ) ) {
 

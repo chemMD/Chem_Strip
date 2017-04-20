@@ -2,3 +2,4 @@ example.pdb out.pdb
 example.mdcrd out.mdcrd
 WAT 2
 N1U N1 Cl- Cl-
+log.txt

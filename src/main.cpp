@@ -39,84 +39,62 @@ using namespace std;
  * @return  0 on success
  */
 
-
 int main( int argc, char* argv[] ) {
 
     cout << "Initializing main..." << endl;
+    ofstream log_file;
+    Input inp;
 
-    Input input;
-    Input* inp = &input;
-
-    if ( !read_input( argv[1], inp ) ) {
+    if ( !read_input( argv[1], inp, log_file ) ) {
         cout << "Problems opening input file: " << argv[1] << endl;
         return 0;
     }
-    cout << inp->pdbfilename << endl;
-    cout << inp->pdboutname << endl;
-    cout << inp->mdcrdfilename << endl;
-    cout << inp->mdcrdoutname << endl;
-    cout << inp->stripcommand << endl;
-    cout << inp->rdf_solute << endl;
-    cout << inp->rdf_solute_atom << endl;
-    cout << inp->rdf_solvent << endl;
-    cout << inp->rdf_solvent_atom << endl;
 
-    int number_of_atoms;
+    Box box;
 
-    vector<Atom> pdb;
-    vector<int> strip_index;
-
-    vector<int> rdf_solute;
-    vector<int> rdf_solvent;
-    vector<int> rdf_solute_index;
-    vector<int> rdf_solvent_index;
-    int rdf_solute_it;
-    int rdf_solvent_it;
-
-    if ( !read_pdb( inp->pdbfilename, number_of_atoms, pdb) ) {
-        cout << "Problems opening pdb file: " << inp->pdbfilename << endl;
-        return 0;
-    }
-    cout << "Number of atoms: " << number_of_atoms << endl;
-
-    if ( !check_pdb( inp->rdf_solute, inp->rdf_solute_atom, inp->rdf_solvent,
-        inp->rdf_solvent_atom, pdb, rdf_solute_index, rdf_solute_it, rdf_solvent_index, rdf_solvent_it ) ) {
-        cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
+    if ( !read_pdb( inp.pdbfilename, box.number_of_atoms, box.pdb, log_file ) ) {
+        cout << "Problems opening pdb file: " << inp.pdbfilename << endl;
         return 0;
     }
 
-    cout << rdf_solute_it << endl;
-    cout << rdf_solvent_it << endl;
+    cout << "Number of atoms: " << box.number_of_atoms << endl;
 
-    if ( !write_pdb( inp->pdboutname, inp->stripcommand, pdb, strip_index ) ) {
-        cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
+    if ( !check_pdb( inp.rdf_solute, inp.rdf_solute_atom, inp.rdf_solvent,
+            inp.rdf_solvent_atom, box.pdb, box.rdf_solute_index, box.rdf_solute_it,
+            box.rdf_solvent_index, box.rdf_solvent_it, log_file ) ) {
+        cout << "Problems writing pdb file: " << inp.pdbfilename << endl;
         return 0;
     }
 
-    cout << number_of_atoms << endl;
+    cout << box.rdf_solute_it << endl;
+    cout << box.rdf_solvent_it << endl;
 
-    vector<Coordinates> mdcrd;
-    vector<Coordinates> per_box_bound;
-    vector<Coordinates> rdf_solute_coord;
-    vector<Coordinates> rdf_solvent_coord;
-
-    if ( !read_mdcrd( inp->mdcrdfilename, inp->time_steps,
-            number_of_atoms, mdcrd, per_box_bound ) ) {
-        cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
+    if ( !write_pdb( inp.pdboutname, inp.stripcommand, box.pdb, box.strip_index, log_file ) ) {
+        cout << "Problems writing pdb file: " << inp.pdbfilename << endl;
         return 0;
     }
 
-    if ( !check_mdcrd( inp->mdcrdfilename, inp->time_steps,number_of_atoms,
-           rdf_solute_index, rdf_solvent_index, mdcrd, rdf_solute_coord, rdf_solvent_coord ) ) {
-        cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
+    Trajectory traj;
+
+    cout << box.number_of_atoms << endl;
+
+    if ( !read_mdcrd( inp.mdcrdfilename, inp.time_steps,
+            box.number_of_atoms, traj.mdcrd, traj.per_box_bound, log_file ) ) {
+        cout << "Problems opening mdcrd file: " << inp.mdcrdfilename << endl;
         return 0;
     }
 
-    if ( !write_mdcrd( inp->mdcrdoutname, inp->time_steps,
-            number_of_atoms, strip_index, mdcrd, per_box_bound ) ) {
-            cout << "Problems writing mdcrd file: " << inp->pdbfilename << endl;
+    if ( !check_mdcrd( inp.mdcrdfilename, inp.time_steps,
+            box.number_of_atoms,box.rdf_solute_index, box.rdf_solvent_index,
+            traj.mdcrd, traj.rdf_solute_coord, traj.rdf_solvent_coord, log_file ) ) {
+        cout << "Problems opening mdcrd file: " << inp.mdcrdfilename << endl;
+        return 0;
+    }
+
+    if ( !write_mdcrd( inp.mdcrdoutname, inp.time_steps,
+            box.number_of_atoms, box.strip_index, traj.mdcrd, traj.per_box_bound, log_file ) ) {
+            cout << "Problems writing mdcrd file: " << inp.pdbfilename << endl;
             return 0;
     }
-
     return 0;
 }

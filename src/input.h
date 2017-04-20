@@ -15,19 +15,20 @@
 #include <cmath>
 #include <ctype.h>
 #include <iomanip>
+#include <stdio.h>
 
 struct Input {
-
-        string pdbfilename;
-        string pdboutname;
-        string mdcrdfilename;
-        string mdcrdoutname;
-        string stripcommand;
-        int time_steps;
-        string rdf_solute;
-        string rdf_solute_atom;
-        string rdf_solvent;
-        string rdf_solvent_atom;
+    string pdbfilename;
+    string pdboutname;
+    string mdcrdfilename;
+    string mdcrdoutname;
+    string stripcommand;
+    int time_steps;
+    string rdf_solute;
+    string rdf_solute_atom;
+    string rdf_solvent;
+    string rdf_solvent_atom;
+    string logfilename;
 };
 
-bool read_input( string inputfilename, Input *inp );
+bool read_input( string inputfilename, Input & inp, ofstream& log_file );

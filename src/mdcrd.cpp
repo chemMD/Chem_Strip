@@ -24,6 +24,17 @@ using namespace std;
 #include "mdcrd.h"
 #include "pdb.h"
 
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: This read_pdb function utilizes the Atom struct
+ *                   found in pdb.h and the vector-struct pdb declared
+ *                   in struct Input.
+ *
+ * Return             true on success
+ *
+ */
+
 string firstresiduename;
 
 bool read_mdcrd ( string mdcrdfilename, int time_steps,
@@ -83,6 +94,18 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps,
         return true;
     }
 }
+
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: This check_mdcrd function utilizes the Atom struct
+ *                   found in pdb.h. It also uses the vector-struct pdb, vector-int
+ *                   rdf_solute_index and vector-int rdf_solvent_index
+ *                   defined/declared in the main program.
+ *
+ * Return             true on success
+ *
+ */
 
 bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
         vector<int> & rdf_solute_index,vector<int> & rdf_solvent_index,
@@ -147,6 +170,17 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
          << "*************************************************************" << endl;
     return true;
 }
+
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: The write_mdcrd function utilizes time_steps, number_of_atoms and strip_index
+ *                   (declared in the struct Box). It also uses the vector-struct mdcrd and vector-struct
+ *                   per_box_bound (declared in struct Trajectory).
+ *
+ * Return             true on success
+ *
+ */
 
 bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms, vector<int> & strip,
         vector<Coordinates> & mdcrd, vector<Coordinates> & per_box_bound, ofstream& log_file ) {

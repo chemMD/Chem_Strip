@@ -42,49 +42,35 @@ using namespace std;
 int main( int argc, char* argv[] ) {
 
     cout << "Initializing main..." << endl;
+    ofstream log_file;
+    Input inp;
 
-    Input input;
-    Input* inp = &input;
-
-    Box box;
-
-    if ( !read_input( argv[1], inp ) ) {
+    if ( !read_input( argv[1], inp, log_file ) ) {
         cout << "Problems opening input file: " << argv[1] << endl;
         return 0;
     }
 
-    cout << inp->pdbfilename << endl;
-    cout << inp->pdboutname << endl;
-    cout << inp->mdcrdfilename << endl;
-    cout << inp->mdcrdoutname << endl;
-    cout << inp->stripcommand << endl;
-    cout << inp->rdf_solute << endl;
-    cout << inp->rdf_solute_atom << endl;
-    cout << inp->rdf_solvent << endl;
-    cout << inp->rdf_solvent_atom << endl;
+    Box box;
 
-    if ( !read_pdb( inp->pdbfilename, box.number_of_atoms, box.pdb) ) {
-
-            cout << "Problems opening pdb file: " << inp->pdbfilename << endl;
+    if ( !read_pdb( inp.pdbfilename, box.number_of_atoms, box.pdb, log_file ) ) {
+        cout << "Problems opening pdb file: " << inp.pdbfilename << endl;
         return 0;
     }
 
     cout << "Number of atoms: " << box.number_of_atoms << endl;
 
-    if ( !check_pdb( inp->rdf_solute, inp->rdf_solute_atom, inp->rdf_solvent,
-            inp->rdf_solvent_atom, box.pdb, box.rdf_solute_index,
-            box.rdf_solute_it, box.rdf_solvent_index, box.rdf_solvent_it ) ) {
-
-        cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
+    if ( !check_pdb( inp.rdf_solute, inp.rdf_solute_atom, inp.rdf_solvent,
+            inp.rdf_solvent_atom, box.pdb, box.rdf_solute_index, box.rdf_solute_it,
+            box.rdf_solvent_index, box.rdf_solvent_it, log_file ) ) {
+        cout << "Problems writing pdb file: " << inp.pdbfilename << endl;
         return 0;
     }
 
     cout << box.rdf_solute_it << endl;
     cout << box.rdf_solvent_it << endl;
 
-    if ( !write_pdb( inp->pdboutname, inp->stripcommand, box.pdb, box.strip_index ) ) {
-
-            cout << "Problems writing pdb file: " << inp->pdbfilename << endl;
+    if ( !write_pdb( inp.pdboutname, inp.stripcommand, box.pdb, box.strip_index, log_file ) ) {
+        cout << "Problems writing pdb file: " << inp.pdbfilename << endl;
         return 0;
     }
 
@@ -92,27 +78,23 @@ int main( int argc, char* argv[] ) {
 
     cout << box.number_of_atoms << endl;
 
-    if ( !read_mdcrd( inp->mdcrdfilename, inp->time_steps,
-            box.number_of_atoms, traj.mdcrd, traj.per_box_bound ) ) {
-
-        cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
+    if ( !read_mdcrd( inp.mdcrdfilename, inp.time_steps,
+            box.number_of_atoms, traj.mdcrd, traj.per_box_bound, log_file ) ) {
+        cout << "Problems opening mdcrd file: " << inp.mdcrdfilename << endl;
         return 0;
     }
 
-    if ( !check_mdcrd( inp->mdcrdfilename, inp->time_steps,
+    if ( !check_mdcrd( inp.mdcrdfilename, inp.time_steps,
             box.number_of_atoms,box.rdf_solute_index, box.rdf_solvent_index,
-            traj.mdcrd, traj.rdf_solute_coord, traj.rdf_solvent_coord ) ) {
-
-        cout << "Problems opening mdcrd file: " << inp->mdcrdfilename << endl;
+            traj.mdcrd, traj.rdf_solute_coord, traj.rdf_solvent_coord, log_file ) ) {
+        cout << "Problems opening mdcrd file: " << inp.mdcrdfilename << endl;
         return 0;
     }
 
-    if ( !write_mdcrd( inp->mdcrdoutname, inp->time_steps,
-            box.number_of_atoms, box.strip_index, traj.mdcrd, traj.per_box_bound ) ) {
-
-            cout << "Problems writing mdcrd file: " << inp->pdbfilename << endl;
+    if ( !write_mdcrd( inp.mdcrdoutname, inp.time_steps,
+            box.number_of_atoms, box.strip_index, traj.mdcrd, traj.per_box_bound, log_file ) ) {
+            cout << "Problems writing mdcrd file: " << inp.pdbfilename << endl;
             return 0;
     }
-
     return 0;
 }

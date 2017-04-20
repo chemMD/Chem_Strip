@@ -3,12 +3,10 @@
  * @file    pdb.cpp
  * @author  Caleb Gallops and Dennis Kennetz
  *
- * This file contains the prototypes read_pdb, check_pdb and write_pdb. The rea\
-d_pdb
-* function is a boolean function that parses the PDB input file stream into a \
-vector
-* of a struct.
-*/
+ * This file contains the prototypes read_pdb, check_pdb and write_pdb. The read_pdb
+ * function is a boolean function that parses the PDB input file stream into a vector
+ * of a struct.
+ */
 
 #include <stdlib.h>
 #include <string>
@@ -35,7 +33,7 @@ using namespace std;
  *
  */
 
-bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb ) {
+bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb, ofstream& log_file ) {
 
     ifstream ifile( pdbfilename );
     string ter = "TER";
@@ -75,6 +73,12 @@ bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb ) {
             break;
         }
     }
+    log_file << "*************************************************************" << endl
+         << "Reading pdb file..." << endl
+         << "PDB file name: "<< pdbfilename << endl
+         << "Number of atoms in box: "<< size << endl
+         << "PDB is in proper format" << endl
+         << "*************************************************************" << endl;
 
     return true;
 }
@@ -94,7 +98,7 @@ bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb ) {
 bool check_pdb ( string rdf_solute, string rdf_solute_atom,
         string rdf_solvent, string rdf_solvent_atom, vector<Atom> & pdb,
         vector<int> & rdf_solute_index,int & rdf_solute_it,
-        vector<int> & rdf_solvent_index, int & rdf_solvent_it ) {
+        vector<int> & rdf_solvent_index, int & rdf_solvent_it, ofstream& log_file ) {
 
     cout << "Locating rdf atoms within file: " << endl;
 
@@ -144,27 +148,14 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
             continue;
 
         } else {
-            cout << setw(5) << left << pdb[i].atom_type
-              << setw(6) << right << pdb[i].atom_number
-              << setw(4) << left << pdb[i].element
-              << setw(5) << right << pdb[i].type
-              << setw(6) << right << pdb[i].residue_number
-              << setw(12) << right << pdb[i].x_coord
-              << setw(8) << right << pdb[i].y_coord
-              << setw(8) << right << pdb[i].z_coord
-              << setw(6) << right << pdb[i].ligand_distance
-              << setw(6) << right << pdb[i].score
-              << endl;
 
             rdf_solvent_index.push_back(int());
             rdf_solvent_index[rdf_solvent_it] = i;
-            cout << rdf_solvent_index[rdf_solvent_it] << endl;
+
             rdf_solvent_it++;
             i++;
         }
-
     }
-
 
     if (rdf_solute_it == 0 ) {
 
@@ -178,6 +169,16 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
 
     } else {
 
+        cout << "Solvent is present";
+        log_file << "*************************************************************" << endl
+             << "Checking and evaluating PDB file..." << endl
+             << "Solute residue "<< rdf_solute << " is present " << endl
+             << "Solute atom "<< rdf_solute_atom << " is present " << endl
+             << "Number of solute atoms in the box: "<< rdf_solute_it << endl
+             << "Solvent residue "<< rdf_solvent << " is present " << endl
+             << "Solvent atom "<< rdf_solvent_atom << " is present " << endl
+             << "Number of solvent atoms in the box: "<< rdf_solvent_it << endl
+             << "*************************************************************" << endl;
     return true;
     }
 }
@@ -193,7 +194,8 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
  *
  */
 
-bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb, vector<int> & strip_index ) {
+bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb,
+        vector<int> & strip_index, ofstream& log_file ) {
 
     cout << "Writing stripped pdb file: " << endl;
     ofstream ofile;
@@ -209,10 +211,10 @@ bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb, vec
     for ( vector<Atom>::iterator it = pdb.begin(); it < pdb.end(); it++) {
 
         if (!(pdb[i].type == stripcommand)) {
-            ofile << setw(5) << left << pdb[i].atom_type
-              << setw(6) << right << pdb[i].atom_number
+            ofile << setw(4) << left << pdb[i].atom_type
+              << setw(7) << right << pdb[i].atom_number << "  "
               << setw(4) << left << pdb[i].element
-              << setw(5) << right << pdb[i].type
+              << setw(3) << left << pdb[i].type
               << setw(6) << right << pdb[i].residue_number
               << setw(12) << right << pdb[i].x_coord
               << setw(8) << right << pdb[i].y_coord
@@ -222,7 +224,6 @@ bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb, vec
               << endl;
 
         } else {
-
             strip_index.push_back(int());
             strip_index[strip_index_it] = i;
             strip_index_it++;
@@ -230,6 +231,13 @@ bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb, vec
 
         i++;
     }
-
+    log_file << "*************************************************************" << endl
+         << "Writing stripped PDB file..." << endl
+         << "PDB output file name: "<< pdboutname << endl
+         << "Residue being removed from pdb "<< stripcommand << endl
+         << "Number of atoms stripped from file: " << strip_index_it << endl
+         << "Number of atoms leftover: "<< (i - strip_index_it ) << endl
+         << "Output file complete "<< endl
+         << "*************************************************************" << endl;
     return true;
 }

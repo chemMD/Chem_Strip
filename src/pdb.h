@@ -1,3 +1,12 @@
+/**
+ * @short   PDB Header
+ * @file    pdb.h
+ * @author  Caleb Gallops and Dennis Kennetz
+ *
+ * This header file contains the structs Atom and Box. It carries the read_pdb,
+ * the check_pdb and the write_pdb declarations.
+ */
+
 #include <stdlib.h>
 #include <string>
 #include <fstream>
@@ -8,6 +17,7 @@
 #include <iomanip>
 #include <vector>
 
+// Properties of the atoms within the PDB file
 struct Atom {
     string atom_type;
     int atom_number;
@@ -21,16 +31,15 @@ struct Atom {
     double score;
 };
 
+//all of the variables that are shared within main and defined based on the PDB file
 struct Box {
-    vector<Atom> pdb;
-    vector<int> strip_index;
-    int number_of_atoms;
-    vector<int> rdf_solute;
-    vector<int> rdf_solvent;
-    vector<int> rdf_solute_index;
-    vector<int> rdf_solvent_index;
-    int rdf_solute_it;
-    int rdf_solvent_it;
+    vector<Atom> pdb;//all of the properties for every atom
+    vector<int> strip_index;//index of every atom to be removed
+    int number_of_atoms;//total number of atoms
+    vector<int> rdf_solute_index;//index of every solute to be used in rdf calculation
+    vector<int> rdf_solvent_index;//index of every solvent atom to be used in rdf calculation
+    int rdf_solute_it;//number of solute atoms
+    int rdf_solvent_it;//number of solvent atoms
 };
 
 bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb, ofstream& log_file );

@@ -41,7 +41,8 @@ using namespace std;
 
 int main( int argc, char* argv[] ) {
 
-    cout << "Initializing main..." << endl;
+    cout << endl << "Initializing main..." << endl << endl;
+
     ofstream log_file;
     Input inp;
 
@@ -57,8 +58,6 @@ int main( int argc, char* argv[] ) {
         return 0;
     }
 
-    cout << "Number of atoms: " << box.number_of_atoms << endl;
-
     if ( !check_pdb( inp.rdf_solute, inp.rdf_solute_atom, inp.rdf_solvent,
             inp.rdf_solvent_atom, box.pdb, box.rdf_solute_index, box.rdf_solute_it,
             box.rdf_solvent_index, box.rdf_solvent_it, log_file ) ) {
@@ -66,17 +65,12 @@ int main( int argc, char* argv[] ) {
         return 0;
     }
 
-    cout << box.rdf_solute_it << endl;
-    cout << box.rdf_solvent_it << endl;
-
     if ( !write_pdb( inp.pdboutname, inp.stripcommand, box.pdb, box.strip_index, log_file ) ) {
         cout << "Problems writing pdb file: " << inp.pdbfilename << endl;
         return 0;
     }
 
     Trajectory traj;
-
-    cout << box.number_of_atoms << endl;
 
     if ( !read_mdcrd( inp.mdcrdfilename, inp.time_steps,
             box.number_of_atoms, traj.mdcrd, traj.per_box_bound, log_file ) ) {
@@ -96,5 +90,6 @@ int main( int argc, char* argv[] ) {
             cout << "Problems writing mdcrd file: " << inp.pdbfilename << endl;
             return 0;
     }
+    cout << "MD_strip run is complete!" << endl << endl;
     return 0;
 }

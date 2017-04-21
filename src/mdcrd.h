@@ -1,3 +1,12 @@
+/**
+ * @short   PDB Header
+ * @file    pdb.h
+ * @author  Caleb Gallops and Dennis Kennetz
+ *
+ * This header file contains the structs Coordinates and Trajectory. It also carries the
+ * read_mdcrd, the check_mdcrd and the write_mdcrd declarations.
+ */
+
 #include <stdlib.h>
 #include <string>
 #include <fstream>
@@ -8,17 +17,21 @@
 #include <iomanip>
 #include <vector>
 
+//Cartesion coordinates of the atoms within the MDCRD file
 struct Coordinates {
+
     double X;
     double Y;
     double Z;
 };
+
+//all of the variables that are shared within main and defined based on the MDCRD file
 struct Trajectory{
 
-    vector<Coordinates> mdcrd;
-    vector<Coordinates> per_box_bound;
-    vector<Coordinates> rdf_solute_coord;
-    vector<Coordinates> rdf_solvent_coord;
+    vector<Coordinates> mdcrd;//coordinates of all of the atoms
+    vector<Coordinates> per_box_bound;//dimensions of the periodic box
+    vector<Coordinates> rdf_solute_coord;//coordinates of the solute atoms
+    vector<Coordinates> rdf_solvent_coord;//coordinates of the solvent atoms
 
 };
 

@@ -8,7 +8,6 @@
  * of a struct.
  */
 
-
 #include <stdlib.h>
 #include <string>
 #include <fstream>
@@ -24,12 +23,24 @@ using namespace std;
 #include "mdcrd.h"
 #include "pdb.h"
 
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: This read_pdb function utilizes the Atom struct
+ *                   found in pdb.h and the vector-struct pdb declared
+ *                   in struct Input.
+ *
+ * Return             true on success
+ *
+ */
+
 string firstresiduename;
 
 bool read_mdcrd ( string mdcrdfilename, int time_steps,
         int number_of_atoms,vector<Coordinates> & mdcrd,
         vector<Coordinates> & per_box_bound, ofstream& log_file ) {
 
+    cout << "Reading MDCRD file ..." << endl;
     int size;
 
     ifstream parmfile( mdcrdfilename );
@@ -70,6 +81,8 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps,
 
         mdcrd.pop_back();
         }
+
+        cout << "MDCRD file has been read." << endl <<endl;
         log_file << "*************************************************************" << endl
              << "Reading mdcrd file..." << endl
              << "MDCRD file name: "<< mdcrdfilename << endl
@@ -84,12 +97,24 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps,
     }
 }
 
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: This check_mdcrd function utilizes the Atom struct
+ *                   found in pdb.h. It also uses the vector-struct pdb, vector-int
+ *                   rdf_solute_index and vector-int rdf_solvent_index
+ *                   defined/declared in the main program.
+ *
+ * Return             true on success
+ *
+ */
+
 bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
         vector<int> & rdf_solute_index,vector<int> & rdf_solvent_index,
         vector<Coordinates> & mdcrd, vector<Coordinates> & rdf_solute_coord,
         vector<Coordinates> & rdf_solvent_coord, ofstream& log_file ) {
 
-    cout << "Writing stripped mdcrd file: "<< mdcrdoutname << endl;
+    cout << "Checking " << mdcrdoutname << " for solute and solvent ..." << endl;
 
     int i = 0;
     int rdf_solute_it;
@@ -109,10 +134,6 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
                 rdf_solute_coord[rdf_solute_it].Y = mdcrd[i].Y;
                 rdf_solute_coord[rdf_solute_it].Z = mdcrd[i].Z;
 
-                cout << rdf_solute_coord[rdf_solute_it].X
-                     << rdf_solute_coord[rdf_solute_it].Y
-                     << rdf_solute_coord[rdf_solute_it].Z << endl;
-
                 rdf_solute_it++;
                 i++;
 
@@ -122,10 +143,6 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
                 rdf_solvent_coord[rdf_solvent_it].X = mdcrd[i].X;
                 rdf_solvent_coord[rdf_solvent_it].Y = mdcrd[i].Y;
                 rdf_solvent_coord[rdf_solvent_it].Z = mdcrd[i].Z;
-
-                cout << rdf_solvent_coord[rdf_solvent_it].X
-                     << rdf_solvent_coord[rdf_solvent_it].Y
-                     << rdf_solvent_coord[rdf_solvent_it].Z << endl;
 
                 rdf_solvent_it++;
                 i++;
@@ -137,6 +154,8 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
             }
         }
     }
+
+    cout << "MDCRD file has been checked." << endl << endl;
     log_file << "*************************************************************" << endl
          << "Checking and evaluating MDCRD file..." << endl
          << "Number of time steps being evaluated: "<< time_steps << endl
@@ -147,6 +166,17 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
          << "*************************************************************" << endl;
     return true;
 }
+
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: The write_mdcrd function utilizes time_steps, number_of_atoms and strip_index
+ *                   (declared in the struct Box). It also uses the vector-struct mdcrd and vector-struct
+ *                   per_box_bound (declared in struct Trajectory).
+ *
+ * Return             true on success
+ *
+ */
 
 bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms, vector<int> & strip,
         vector<Coordinates> & mdcrd, vector<Coordinates> & per_box_bound, ofstream& log_file ) {
@@ -193,7 +223,6 @@ bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms, vec
         z = 0;
 
         strip_index_it = 0;
-        cout<< strip[strip_index_it] << endl;
 
         for ( vector<Coordinates>::iterator it = mdcrd.begin(); i < ( number_of_atoms * j ); it++) {
 
@@ -241,6 +270,8 @@ bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms, vec
               << setw(8) << right << per_box_bound[j-1].Y
               << setw(8) << right << per_box_bound[j-1].Z << endl;
     }
+
+    cout << "Stripped MDCRD file has been written." << endl << endl;
     log_file << "*************************************************************" << endl
          << "Writing stripped MDCRD file..." << endl
          << "Number of time steps being written: "<< time_steps << endl

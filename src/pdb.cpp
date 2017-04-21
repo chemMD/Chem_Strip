@@ -35,6 +35,8 @@ using namespace std;
 
 bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb, ofstream& log_file ) {
 
+    cout << "Reading PDB file: " << pdbfilename << endl;
+
     ifstream ifile( pdbfilename );
     string ter = "TER";
 
@@ -73,6 +75,8 @@ bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb, ofstream& lo
             break;
         }
     }
+
+    cout << "Finished reading PDB file." << endl << endl;
     log_file << "*************************************************************" << endl
          << "Reading pdb file..." << endl
          << "PDB file name: "<< pdbfilename << endl
@@ -100,7 +104,7 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
         vector<int> & rdf_solute_index,int & rdf_solute_it,
         vector<int> & rdf_solvent_index, int & rdf_solvent_it, ofstream& log_file ) {
 
-    cout << "Locating rdf atoms within file: " << endl;
+    cout << "Locating rdf atoms within file... " << endl;
 
     int i = 0;
     rdf_solute_it = 0;
@@ -115,21 +119,9 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
             continue;
 
         } else {
-            cout << setw(5) << left << pdb[i].atom_type
-              << setw(6) << right << pdb[i].atom_number
-              << setw(4) << left << pdb[i].element
-              << setw(5) << right << pdb[i].type
-              << setw(6) << right << pdb[i].residue_number
-              << setw(12) << right << pdb[i].x_coord
-              << setw(8) << right << pdb[i].y_coord
-              << setw(8) << right << pdb[i].z_coord
-              << setw(6) << right << pdb[i].ligand_distance
-              << setw(6) << right << pdb[i].score
-              << endl;
 
             rdf_solute_index.push_back(int());
             rdf_solute_index[rdf_solute_it] = i;
-            cout << rdf_solute_index[rdf_solute_it] << endl;
             rdf_solute_it++;
             i++;
         }
@@ -159,17 +151,17 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
 
     if (rdf_solute_it == 0 ) {
 
-        cout << "No solute present" << endl;
+        cout << "No solute present" << endl << endl;
         return false;
 
     } else if (rdf_solvent_it == 0) {
 
-        cout << "No solvent present" << endl;
+        cout << "No solvent present" << endl << endl;
         return false;
 
     } else {
 
-        cout << "Solvent is present";
+        cout << "Both solute and solvent is present" <<endl << endl;
         log_file << "*************************************************************" << endl
              << "Checking and evaluating PDB file..." << endl
              << "Solute residue "<< rdf_solute << " is present " << endl
@@ -197,7 +189,7 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
 bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb,
         vector<int> & strip_index, ofstream& log_file ) {
 
-    cout << "Writing stripped pdb file: " << endl;
+    cout << "Writing stripped pdb file: " << pdboutname << endl;
     ofstream ofile;
 
     ofile.open( pdboutname );
@@ -231,6 +223,8 @@ bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb,
 
         i++;
     }
+
+    cout << "Stripped PDB file has been written." << endl << endl;
     log_file << "*************************************************************" << endl
          << "Writing stripped PDB file..." << endl
          << "PDB output file name: "<< pdboutname << endl

@@ -19,11 +19,11 @@
 
 // Properties of the atoms within the PDB file
 struct Atom {
-    string atom_type;
-    int atom_number;
-    string element;
-    string type;
-    int residue_number;
+    string atom_type;//either ATOM,HEATOM, TER or END
+    int atom_number;//the sequential order of all atoms
+    string element;//the atoms identity
+    string type;//the residue the atom is a part of
+    int residue_number;//the sequential order of the residue
     double x_coord;
     double y_coord;
     double z_coord;

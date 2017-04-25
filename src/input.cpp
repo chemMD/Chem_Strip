@@ -24,6 +24,18 @@ using namespace std;
 
 #include "input.h"
 
+/**
+ * Author:            Caleb Gallops and Dennis Kennetz
+ *
+ * Short description: This read_input function utilizes the Input struct
+ *                   found in input.h and the command line argument argv[1]
+ *                   (read as inputfilename). It reads the user-specified
+ *                   parameters and passes the arguments to the main function.
+ *
+ * Return             true on success
+ *
+ */
+
 bool read_input( string inputfilename, Input & inp, ofstream& log_file ) {
 
     ifstream file;

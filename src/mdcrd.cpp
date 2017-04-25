@@ -23,19 +23,19 @@ using namespace std;
 #include "mdcrd.h"
 #include "pdb.h"
 
+string firstresiduename;
+
 /**
- * Author:            Caleb Gallops and Dennis Kennetz
+ *  *   * Author:            Caleb Gallops and Dennis Kennetz
  *
  * Short description: This read_pdb function utilizes the Atom struct
  *                   found in pdb.h and the vector-struct pdb declared
- *                   in struct Input.
+ *                   in struct Input. It reads the MDCRD file for all of
+ *                   the atom coordinates.
  *
  * Return             true on success
  *
  */
-
-string firstresiduename;
-
 bool read_mdcrd ( string mdcrdfilename, int time_steps,
         int number_of_atoms,vector<Coordinates> & mdcrd,
         vector<Coordinates> & per_box_bound, ofstream& log_file ) {
@@ -103,7 +103,8 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps,
  * Short description: This check_mdcrd function utilizes the Atom struct
  *                   found in pdb.h. It also uses the vector-struct pdb, vector-int
  *                   rdf_solute_index and vector-int rdf_solvent_index
- *                   defined/declared in the main program.
+ *                   defined/declared in the main program. It saves all of the solute
+ *                   and solvent coordinates into vectors.
  *
  * Return             true on success
  *
@@ -172,7 +173,7 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
  *
  * Short description: The write_mdcrd function utilizes time_steps, number_of_atoms and strip_index
  *                   (declared in the struct Box). It also uses the vector-struct mdcrd and vector-struct
- *                   per_box_bound (declared in struct Trajectory).
+ *                   per_box_bound (declared in struct Trajectory). It writes the stripped MDCRD file.
  *
  * Return             true on success
  *

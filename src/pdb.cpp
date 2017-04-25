@@ -27,7 +27,7 @@ using namespace std;
  *
  * Short description: This read_pdb function utilizes the Atom struct
  *                   found in pdb.h and the vector-struct pdb declared
- *                   in main program.
+ *                   in main program. It reads the PDB file for all the atoms.
  *
  * Return             true on success
  *
@@ -93,7 +93,8 @@ bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb, ofstream& lo
  * Short description: This check_pdb function utilizes the Atom struct
  *                   found in pdb.h. It also uses the vector-struct pdb, vector-int
  *                   rdf_solute_index and vector-int rdf_solvent_index
- *                   defined/declared in the main program.
+ *                   defined/declared in the main function. It checks the PDB file
+ *                   to see if there are any solute or solute molecules present.
  *
  * Return             true on success
  *
@@ -180,7 +181,7 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
  *
  * Short description: The write_pdb function utilizes the vector-struct
  *                   pdb and the vector-int strip_index defined/declared in the 
- *                   main program.
+ *                   main program. It writes the stripped PDB file.
  *
  * Return             true on success
  *

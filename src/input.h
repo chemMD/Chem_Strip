@@ -17,6 +17,7 @@
 #include <iomanip>
 #include <stdio.h>
 
+//all of the user-specified parameters
 struct Input {
     string pdbfilename;
     string pdboutname;

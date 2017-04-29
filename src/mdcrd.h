@@ -36,7 +36,7 @@ struct Trajectory{
 };
 
 bool read_mdcrd (string mdcrdfilename,int time_steps, int number_of_atoms,
-         vector<Coordinates> & mdcrd, vector<Coordinates> & per_box_bound, ofstream& log_file );
+        vector<Coordinates> & mdcrd, vector<Coordinates> & per_box_bound, ofstream& log_file );
 
 bool check_mdcrd ( string mdcrdoutname, int time_steps,
         int number_of_atoms, vector<int> & rdf_solute_index,
@@ -45,5 +45,5 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps,
         vector<Coordinates> & rdf_solvent_coord, ofstream& log_file );
 
 bool write_mdcrd (string mdcrdoutname, int time_steps, int number_of_atoms,
-         vector<int> & strip, vector<Coordinates> & mdcrd,
-         vector<Coordinates> & per_box_bound, ofstream& log_file );
+        vector<int> & strip, vector<Coordinates> & mdcrd,
+        vector<Coordinates> & per_box_bound, ofstream& log_file );

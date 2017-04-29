@@ -58,14 +58,14 @@ bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb, ofstream& lo
             continue;
 
         } else if ( ifile >> pdb[size].atom_number
-                          >> pdb[size].element
-                          >> pdb[size].type
-                          >> pdb[size].residue_number
-                          >> pdb[size].x_coord
-                          >> pdb[size].y_coord
-                          >> pdb[size].z_coord
-                          >> pdb[size].ligand_distance
-                          >> pdb[size].score) {
+                >> pdb[size].element
+                >> pdb[size].type
+                >> pdb[size].residue_number
+                >> pdb[size].x_coord
+                >> pdb[size].y_coord
+                >> pdb[size].z_coord
+                >> pdb[size].ligand_distance
+                >> pdb[size].score) {
 
             pdb.push_back(Atom());
             size++;
@@ -78,11 +78,11 @@ bool read_pdb ( string pdbfilename, int & size, vector<Atom> & pdb, ofstream& lo
 
     cout << "Finished reading PDB file." << endl << endl;
     log_file << "*************************************************************" << endl
-         << "Reading pdb file..." << endl
-         << "PDB file name: "<< pdbfilename << endl
-         << "Number of atoms in box: "<< size << endl
-         << "PDB is in proper format" << endl
-         << "*************************************************************" << endl;
+            << "Reading pdb file..." << endl
+            << "PDB file name: "<< pdbfilename << endl
+            << "Number of atoms in box: "<< size << endl
+            << "PDB is in proper format" << endl
+            << "*************************************************************" << endl;
 
     return true;
 }
@@ -164,15 +164,15 @@ bool check_pdb ( string rdf_solute, string rdf_solute_atom,
 
         cout << "Both solute and solvent is present" <<endl << endl;
         log_file << "*************************************************************" << endl
-             << "Checking and evaluating PDB file..." << endl
-             << "Solute residue "<< rdf_solute << " is present " << endl
-             << "Solute atom "<< rdf_solute_atom << " is present " << endl
-             << "Number of solute atoms in the box: "<< rdf_solute_it << endl
-             << "Solvent residue "<< rdf_solvent << " is present " << endl
-             << "Solvent atom "<< rdf_solvent_atom << " is present " << endl
-             << "Number of solvent atoms in the box: "<< rdf_solvent_it << endl
-             << "*************************************************************" << endl;
-    return true;
+                << "Checking and evaluating PDB file..." << endl
+                << "Solute residue "<< rdf_solute << " is present " << endl
+                << "Solute atom "<< rdf_solute_atom << " is present " << endl
+                << "Number of solute atoms in the box: "<< rdf_solute_it << endl
+                << "Solvent residue "<< rdf_solvent << " is present " << endl
+                << "Solvent atom "<< rdf_solvent_atom << " is present " << endl
+                << "Number of solvent atoms in the box: "<< rdf_solvent_it << endl
+                << "*************************************************************" << endl;
+        return true;
     }
 }
 
@@ -205,16 +205,16 @@ bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb,
 
         if (!(pdb[i].type == stripcommand)) {
             ofile << setw(4) << left << pdb[i].atom_type
-              << setw(7) << right << pdb[i].atom_number << "  "
-              << setw(4) << left << pdb[i].element
-              << setw(3) << left << pdb[i].type
-              << setw(6) << right << pdb[i].residue_number
-              << setw(12) << right << pdb[i].x_coord
-              << setw(8) << right << pdb[i].y_coord
-              << setw(8) << right << pdb[i].z_coord
-              << setw(6) << right << pdb[i].ligand_distance
-              << setw(6) << right << pdb[i].score
-              << endl;
+                    << setw(7) << right << pdb[i].atom_number << "  "
+                    << setw(4) << left << pdb[i].element
+                    << setw(3) << left << pdb[i].type
+                    << setw(6) << right << pdb[i].residue_number
+                    << setw(12) << right << pdb[i].x_coord
+                    << setw(8) << right << pdb[i].y_coord
+                    << setw(8) << right << pdb[i].z_coord
+                    << setw(6) << right << pdb[i].ligand_distance
+                    << setw(6) << right << pdb[i].score
+                    << endl;
 
         } else {
             strip_index.push_back(int());
@@ -227,12 +227,12 @@ bool write_pdb ( string pdboutname, string stripcommand, vector<Atom> & pdb,
 
     cout << "Stripped PDB file has been written." << endl << endl;
     log_file << "*************************************************************" << endl
-         << "Writing stripped PDB file..." << endl
-         << "PDB output file name: "<< pdboutname << endl
-         << "Residue being removed from pdb "<< stripcommand << endl
-         << "Number of atoms stripped from file: " << strip_index_it << endl
-         << "Number of atoms leftover: "<< (i - strip_index_it ) << endl
-         << "Output file complete "<< endl
-         << "*************************************************************" << endl;
+            << "Writing stripped PDB file..." << endl
+            << "PDB output file name: "<< pdboutname << endl
+            << "Residue being removed from pdb "<< stripcommand << endl
+            << "Number of atoms stripped from file: " << strip_index_it << endl
+            << "Number of atoms leftover: "<< (i - strip_index_it ) << endl
+            << "Output file complete "<< endl
+            << "*************************************************************" << endl;
     return true;
 }

@@ -68,8 +68,8 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps,
 
                     per_box_bound.push_back(Coordinates());
                     parmfile >> per_box_bound[j-1].X
-                             >> per_box_bound[j-1].Y
-                             >> per_box_bound[j-1].Z;
+                    >> per_box_bound[j-1].Y
+                    >> per_box_bound[j-1].Z;
                     break;
 
                 } else if ( parmfile >> mdcrd[size].X >> mdcrd[size].Y >> mdcrd[size].Z ) {
@@ -79,20 +79,20 @@ bool read_mdcrd ( string mdcrdfilename, int time_steps,
 
             }
 
-        mdcrd.pop_back();
+            mdcrd.pop_back();
         }
 
         cout << "MDCRD file has been read." << endl <<endl;
         log_file << "*************************************************************" << endl
-             << "Reading mdcrd file..." << endl
-             << "MDCRD file name: "<< mdcrdfilename << endl
-             << "Number of time steps to be evaluated: "<< time_steps << endl
-             << "Starting periodic boundaries: " << per_box_bound[0].X << " "
-                 << per_box_bound[0].Y << " " << per_box_bound[0].Z << endl
-             << "Ending periodic boundaries: " << per_box_bound[time_steps-1].X << " "
-                 << per_box_bound[time_steps-1].Y << " "<< per_box_bound[time_steps-1].Z << endl
-             << "MDCRD file successfully read" << endl
-             << "*************************************************************" << endl;
+                << "Reading mdcrd file..." << endl
+                << "MDCRD file name: "<< mdcrdfilename << endl
+                << "Number of time steps to be evaluated: "<< time_steps << endl
+                << "Starting periodic boundaries: " << per_box_bound[0].X << " "
+                << per_box_bound[0].Y << " " << per_box_bound[0].Z << endl
+                << "Ending periodic boundaries: " << per_box_bound[time_steps-1].X << " "
+                << per_box_bound[time_steps-1].Y << " "<< per_box_bound[time_steps-1].Z << endl
+                << "MDCRD file successfully read" << endl
+                << "*************************************************************" << endl;
         return true;
     }
 }
@@ -158,13 +158,13 @@ bool check_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms,
 
     cout << "MDCRD file has been checked." << endl << endl;
     log_file << "*************************************************************" << endl
-         << "Checking and evaluating MDCRD file..." << endl
-         << "Number of time steps being evaluated: "<< time_steps << endl
-         << "Number of atoms per time step: "<< number_of_atoms << endl
-         << "Number of solute atoms per time step: "<< rdf_solute_it << endl
-         << "Number of solvent atoms per time step: "<< rdf_solvent_it << endl
-         << "MDCRD successfully evaluated "<< endl
-         << "*************************************************************" << endl;
+            << "Checking and evaluating MDCRD file..." << endl
+            << "Number of time steps being evaluated: "<< time_steps << endl
+            << "Number of atoms per time step: "<< number_of_atoms << endl
+            << "Number of solute atoms per time step: "<< rdf_solute_it << endl
+            << "Number of solvent atoms per time step: "<< rdf_solvent_it << endl
+            << "MDCRD successfully evaluated "<< endl
+            << "*************************************************************" << endl;
     return true;
 }
 
@@ -232,32 +232,32 @@ bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms, vec
                 if ( i == ( x_print_form[x] + number_of_atoms * ( j - 1 ) ) ) {
 
                     ofile << setw(8) << right << mdcrd[i].X << '\n'
-                          << setw(8) << right << mdcrd[i].Y
-                          << setw(8) << right << mdcrd[i].Z;
+                            << setw(8) << right << mdcrd[i].Y
+                            << setw(8) << right << mdcrd[i].Z;
                     x++;
 
                 } else if ( i == ( y_print_form[y] + number_of_atoms * ( j - 1 ) ) ) {
 
                     ofile << setw(8) << right << mdcrd[i].X
-                          << setw(8) << right << mdcrd[i].Y << '\n'
-                          << setw(8) << right << mdcrd[i].Z;
+                            << setw(8) << right << mdcrd[i].Y << '\n'
+                            << setw(8) << right << mdcrd[i].Z;
                     y++;
 
                 } else if ( i == ( z_print_form[z] + number_of_atoms * ( j - 1 ) ) ) {
 
                     ofile << setw(8) << right << mdcrd[i].X
-                          << setw(8) << right << mdcrd[i].Y
-                          << setw(8) << right << mdcrd[i].Z << '\n';
+                            << setw(8) << right << mdcrd[i].Y
+                            << setw(8) << right << mdcrd[i].Z << '\n';
                     z++;
 
                 } else {
 
                     ofile << setw(8) << right << mdcrd[i].X
-                          << setw(8) << right << mdcrd[i].Y
-                          << setw(8) << right << mdcrd[i].Z;
+                            << setw(8) << right << mdcrd[i].Y
+                            << setw(8) << right << mdcrd[i].Z;
                 }
 
-            i++;
+                i++;
 
             } else {
 
@@ -267,20 +267,20 @@ bool write_mdcrd ( string mdcrdoutname, int time_steps, int number_of_atoms, vec
         }
 
         ofile << endl
-              << setw(8) << right << per_box_bound[j-1].X
-              << setw(8) << right << per_box_bound[j-1].Y
-              << setw(8) << right << per_box_bound[j-1].Z << endl;
+                << setw(8) << right << per_box_bound[j-1].X
+                << setw(8) << right << per_box_bound[j-1].Y
+                << setw(8) << right << per_box_bound[j-1].Z << endl;
     }
 
     cout << "Stripped MDCRD file has been written." << endl << endl;
     log_file << "*************************************************************" << endl
-         << "Writing stripped MDCRD file..." << endl
-         << "Number of time steps being written: "<< time_steps << endl
-         << "Number of atoms removed from each time steps: "<< strip_index_it << endl
-         << "Number of atoms leftover per time step: "<< ( number_of_atoms - strip_index_it ) * time_steps << endl
-         << "Total number of atoms removed: "<< strip_index_it << endl
-         << "Total number of atoms leftover: "<< ( number_of_atoms - strip_index_it ) * time_steps << endl
-         << "Stripped MDCRD successfully written "<< endl
-         << "*************************************************************" << endl;
+            << "Writing stripped MDCRD file..." << endl
+            << "Number of time steps being written: "<< time_steps << endl
+            << "Number of atoms removed from each time steps: "<< strip_index_it << endl
+            << "Number of atoms leftover per time step: "<< ( number_of_atoms - strip_index_it ) * time_steps << endl
+            << "Total number of atoms removed: "<< strip_index_it << endl
+            << "Total number of atoms leftover: "<< ( number_of_atoms - strip_index_it ) * time_steps << endl
+            << "Stripped MDCRD successfully written "<< endl
+            << "*************************************************************" << endl;
     return true;
 }

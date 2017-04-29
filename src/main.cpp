@@ -94,8 +94,8 @@ int main( int argc, char* argv[] ) {
     //writes a copy of MDCRD file without the coordinates of the user-specified atoms
     if ( !write_mdcrd( inp.mdcrdoutname, inp.time_steps,
             box.number_of_atoms, box.strip_index, traj.mdcrd, traj.per_box_bound, log_file ) ) {
-            cout << "Problems writing mdcrd file: " << inp.pdbfilename << endl;
-            return 0;
+        cout << "Problems writing mdcrd file: " << inp.pdbfilename << endl;
+        return 0;
     }
 
     cout << "MD_strip run is complete!" << endl << endl;

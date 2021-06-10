@@ -6,7 +6,7 @@ Removes atoms from pdb, topology and trajectory files. It includes radial distri
 Molecular Dynamics in Biomolecular Modeling
 Molecular dynamics is a computer simulation method used for various types of systems. In brief, molecular dynamics computes the positions of atoms and the changes in those positions over time. The focus in the Chem_Strip project development is to create a program that edits and evaluates files commonly used in molecular dynamics for biomolecular modeling. There are two types of files that this program can process so far: Protein Data Base (pdb) files and Molecular Dynamics Coordinate (mdcrd) files. The pdb files list the atoms and their properties of a system that is to be evaluated. The mdcrd files list the coordinates of each atom in the same order as the pdb file for every time step in sequential order.
 
-https://camo.githubusercontent.com/434ca02e0b0d35dac483818dc96e96dd9a4825688cff6c192b1d06d66da91465/687474703a2f2f617263686976652e616d6265726d642e6f72672f3230313130382f6174742d303635362f322e676966
+![picture_1](https://camo.githubusercontent.com/434ca02e0b0d35dac483818dc96e96dd9a4825688cff6c192b1d06d66da91465/687474703a2f2f617263686976652e616d6265726d642e6f72672f3230313130382f6174742d303635362f322e676966)
 
 Photo Credit: http://archive.ambermd.org/201108/att-0656/2.gif
 

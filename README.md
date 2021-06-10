@@ -19,8 +19,8 @@ Molecular Dynamics Coordinate (MDCRD) files are very large when employing molecu
 ### Stripping PDB and MDCRD files
 This program allows those who employ molecular dynamics in their research to remove any unwanted residues from their PDB and MDCRD files. This inherently shrinks the size of these files, making them more portable and easier to analyze. The user can also specify any residues it wants to use for radial distribution calculations.(Currently, this part of the program is not functional and is not included in the Github repository.) Images of a visualized PDB file (example.pdb) and a stripped PDB file (out.pdb) are shown below.
 
-https://github.com/chemMD/Chem_Strip/wiki/example.png
-https://github.com/chemMD/Chem_Strip/wiki/out.png
+![picture_2](https://github.com/chemMD/Chem_Strip/wiki/example.png)
+![picture_3](https://github.com/chemMD/Chem_Strip/wiki/out.png)
 
 The same is conducted for the MDCRD files but for multiple time steps.
 

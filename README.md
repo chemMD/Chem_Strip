@@ -1,7 +1,7 @@
 # Chem_Strip
 Removes atoms from pdb, topology and trajectory files. It includes radial distribution calculations and other options.
 
-##Introduction
+## Introduction
 
 Molecular Dynamics in Biomolecular Modeling
 Molecular dynamics is a computer simulation method used for various types of systems. In brief, molecular dynamics computes the positions of atoms and the changes in those positions over time. The focus in the Chem_Strip project development is to create a program that edits and evaluates files commonly used in molecular dynamics for biomolecular modeling. There are two types of files that this program can process so far: Protein Data Base (pdb) files and Molecular Dynamics Coordinate (mdcrd) files. The pdb files list the atoms and their properties of a system that is to be evaluated. The mdcrd files list the coordinates of each atom in the same order as the pdb file for every time step in sequential order.
@@ -11,12 +11,12 @@ https://camo.githubusercontent.com/434ca02e0b0d35dac483818dc96e96dd9a4825688cff6
 Photo Credit: http://archive.ambermd.org/201108/att-0656/2.gif
 
 
-##Stripping Residues
+## Stripping Residues
 
-###Problems with Big Files
+### Problems with Big Files
 Molecular Dynamics Coordinate (MDCRD) files are very large when employing molecular dynamics for the purpose of biomolecular research. The size of these files can range up to several hundred gigabytes. This leads to the main purpose for creating the Chem_Strip program: removing unnecessary atoms from MDCRD files and their corresponding Protein Data Bank (PDB) Files.
 
-###Stripping PDB and MDCRD files
+### Stripping PDB and MDCRD files
 This program allows those who employ molecular dynamics in their research to remove any unwanted residues from their PDB and MDCRD files. This inherently shrinks the size of these files, making them more portable and easier to analyze. The user can also specify any residues it wants to use for radial distribution calculations.(Currently, this part of the program is not functional and is not included in the Github repository.) Images of a visualized PDB file (example.pdb) and a stripped PDB file (out.pdb) are shown below.
 
 https://github.com/chemMD/Chem_Strip/wiki/example.png
@@ -25,7 +25,7 @@ https://github.com/chemMD/Chem_Strip/wiki/out.png
 The same is conducted for the MDCRD files but for multiple time steps.
 
 
-##User Instructions
+## User Instructions
 The code in this repository compiles to create an executable name MD_strip.
 
 To run the program the file containing all of the input parameters must be present in the same directory as the MD_strip executable. MD_strip is executed on the command in the following way.
